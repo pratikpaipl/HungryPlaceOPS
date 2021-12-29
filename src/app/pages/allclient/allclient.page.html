@@ -1,0 +1,87 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <ion-grid style="padding: 5px 8px !important;" no-padding class="header padding-0">
+                <ion-row style="align-items: center;">
+                    <ion-col size="11">
+                        <div class="page_had">
+                            <ion-buttons (click)="tools.backPage()" no-padding>
+                                <ion-img class="img" src="../../../assets/images/Backwhite.png"></ion-img>
+                            </ion-buttons>
+                            <ion-label class="page_wtitle">All Client List</ion-label>
+                        </div>
+                    </ion-col>
+                    <ion-col size="1">
+                        <ion-buttons no-padding (click)="printer()">
+                            <ion-img src="../../../assets/images/printer.png"> </ion-img>
+                        </ion-buttons>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background: #fff">
+    <ion-grid class="container search_compo">
+        <ion-row style="padding: 0;">
+            <ion-col style="padding: 0;" size='12'>
+                <div class="search_box">
+                    <ion-img class="search_icon" src="../../../assets/images/search.png"></ion-img>
+                    <ion-input type="search" placeholder="Search" [(ngModel)]="AgentName" (ionChange)="ionChange()"></ion-input>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <div class="page_wapper">
+        <ion-grid class="container">
+            <!-- *ngFor="let agent of AgentList ;" -->
+            <ion-row class="box-des" style="align-items: center !important;">
+                <ion-col>
+                    <ion-row>
+                        <ion-label class="d-block title f-15">Client Name</ion-label>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col class="left_col">
+                            <ion-label class="d-block">Mobile No.</ion-label>
+                        </ion-col>
+                        <ion-col class="right_col">
+                            <ion-label class="d-block">+44 1312123132</ion-label>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col class="left_col">
+                            <ion-label class="d-block">Email</ion-label>
+                        </ion-col>
+                        <ion-col class="right_col">
+                            <ion-label class="d-block">test@test.com</ion-label>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col class="left_col">
+                            <ion-label class="d-block">Preferences</ion-label>
+                        </ion-col>
+                        <ion-col class="right_col">
+                            <div class="action_buttion">
+                                <ion-img class="ac_img" src="../../../assets/images/greenplus.png" (click)="addprefrences()"></ion-img>
+                                <ion-img class="ac_img" src="../../../assets/images/deletetwo.png" (click)="deleteprefrences()"></ion-img>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid class="container empty-list-box" *ngIf="AgentList?.length == 0">
+            <ion-row class="p-0">
+                <ion-col size="12" class="p-0">
+                    <ion-label class="empty-list">No Data Available!</ion-label>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+
+</ion-content>

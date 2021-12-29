@@ -1,0 +1,224 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <ion-grid style="padding: 5px 8px !important;" no-padding class="header padding-0">
+                <ion-row style="align-items: center;">
+                    <ion-col size="11">
+                        <div class="page_had">
+                            <ion-buttons (click)="tools.backPage()" no-padding>
+                                <ion-img class="img" src="../../../assets/images/Backwhite.png"></ion-img>
+                            </ion-buttons>
+                            <ion-label class="page_wtitle">Order No : 0000</ion-label>
+                        </div>
+                    </ion-col>
+                    <ion-col size="1">
+                        <ion-buttons no-padding (click)="printer()">
+                            <ion-img src="../../../assets/images/printer.png"> </ion-img>
+                        </ion-buttons>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background: #fff">
+    <ion-grid class="container" style="margin-top: 10px !important;">
+        <ion-row class="box-des p-0">
+            <ion-col class="content_col" size="12" style="background: #f6f6f6;">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">Order No : 0000</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="d-block f-11" style="color: orange;">Pending</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">Test</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="d-block f-11">+44 00000000</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="graytxt f-11">Location here</ion-label>
+                    </ion-col>
+
+                </ion-row>
+                <ion-row>
+                    <ion-col class="right_col">
+                        <ion-label class="d-block" style="color: red !important; margin-left: -22px !important; ">View Location</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">Order Type</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="graytxt f-11">Delivery</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">Payment Type</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="graytxt f-11">COD</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">Ordered Time</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="graytxt f-11">00:00 AM</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">Delivery Date</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="graytxt f-11">00 Jan 0000</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">Despatch Time</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="graytxt f-11">00:00 PM</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">Delivery Instruction</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="graytxt f-11">test@test.com</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+
+        <ion-row class="box-des p-0" style="margin-top: 15px;">
+            <ion-col class="content_col" size="12" style="background: #f6f6f6;">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">Order Details</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">0x0 Kulfi</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="d-block f-11">$ 00</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">0x0 Raita (BOGO)</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="d-block f-11">Free</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block title f-15">Sub Total</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="d-block title f-15">$ 0000</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">Discount - 3.5 %</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="graytxt f-11">(00)</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-11">Delivery Fee</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="graytxt f-11">$ 000</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+
+
+
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block title f-15">Total</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="d-block title f-15">$ 000</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row class="button_box">
+            <ion-col>
+                <ion-button class="btn-red" (click)="decline()">DECLINE</ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button class="btn-green" (click)="accept()">ACCEPT</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row class="button_box">
+            <ion-col>
+                <ion-button class="btn-green" (click)="chngstatus()">CHANGE STATUS</ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button class="btn-red" (click)="btnprint()">PRINT</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row class="button_box">
+            <ion-col>
+                <ion-button class="btn-blue" (click)="assignDriver()">ASSIGN DRIVER</ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button class="btn-orange" (click)="refund()">REFUND</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

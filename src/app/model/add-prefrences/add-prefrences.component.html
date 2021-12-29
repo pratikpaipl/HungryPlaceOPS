@@ -1,0 +1,33 @@
+<ion-content>
+    <span class="shaprator"></span>
+
+    <ion-grid style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+        <ion-row>
+            <ion-col>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-label class="logo-title">Add Preferences</ion-label>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-item class="form-control">
+                            <ion-label position="floating">Enter Preferences</ion-label>
+                            <ion-input type="text" style="text-transform: none !important;" [(ngModel)]="speinst"></ion-input>
+                            <!-- <ion-input type="text" autocapitalize='sentences' placeholder="Enter Preferences" [(ngModel)]="speinst"></ion-input> -->
+
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-button class="btn-red" type="submit">Reset</ion-button>
+                </ion-row>
+
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+</ion-content>

@@ -12,20 +12,12 @@ import { Tools } from 'src/app/shared/tools';
 export class HomePage {
   user: any;
 
-  //For Admin
-  AdminInqList = [];
-  ALLAdminInqList = [];
-  fullname = "";
 
   //For User
   MachineList = [];
   ALLMachineList = [];
   machineName = "";
 
-   //For Agent
-   AgentInqList = [];
-   ALLAgentInqList = [];
-   Inqname = "";
 
 
   sumCart = 0;
@@ -48,22 +40,9 @@ export class HomePage {
   //    }
 
   ionViewDidEnter() {
-    if(this.apiService.getCartData()!=undefined){
-      this.sumCart = this.apiService.getCartData().reduce((a, b) => a + b.qty, 0);
-    }else{
-      this.sumCart =0;
-    }
-    this.user = this.apiService.getUserData();
-
-    if (this.user.roleid === '1') {
-      this.getAdminInquiryList();
-    }
-    if (this.user.roleid === '2') {
-      this.getMachineList();
-    }
-    if (this.user.roleid === '3') {
-      this.getAgentInquiryList();
-    }
+ 
+      //this.getMachineList();
+  
   }
 
   openFirst() {
@@ -71,39 +50,44 @@ export class HomePage {
     this.menu.open("first");
   }
 
-  productlist(MachineID,MachinePdf) {
-    this.router.navigateByUrl("productslist/"+MachineID);
-    localStorage.setItem("MachinePdf",MachinePdf);
+
+  ordrerSummary(){
+    this.router.navigateByUrl("ordersumary");
+
+  }
+  driverSummary(){
+    this.router.navigateByUrl("driversumary");
+
   }
 
-  cart() {
-    this.router.navigateByUrl("cart");
-  }
   Dashboard() {
     this.menu.close();
     this.router.navigateByUrl("home");
   }
-  Cart() {
+  tableBooking() {
     this.menu.close();
-    this.router.navigateByUrl("cart");
-  }
-  MyInquiry() {
-    this.menu.close();
-    this.router.navigateByUrl("myinquiry");
+    this.router.navigateByUrl("home");
   }
 
-  AddUser() {
+  allClientList() {
     this.menu.close();
-    this.router.navigateByUrl("adduser");
+    this.router.navigateByUrl("allclient");
   }
-
+  allOrderList() {
+    this.menu.close();
+    this.router.navigateByUrl("orderhistory");
+  }
   Profile() {
     this.menu.close();
     this.router.navigateByUrl("profile");
   }
-  Contact() {
+  printSetup() {
     this.menu.close();
-    this.router.navigateByUrl("contactus");
+    this.router.navigateByUrl("profile");
+  }
+  printOptions() {
+    this.menu.close();
+    this.router.navigateByUrl("profile");
   }
   logout(isLogin) {
     this.menu.close();
@@ -120,35 +104,12 @@ export class HomePage {
     }
   }
 
-  //For Admin
-  Agent() {
-    this.menu.close();
-    this.router.navigateByUrl("agent");
-  }
-
-  Machine() {
-    this.menu.close();
-    this.router.navigateByUrl("machinelist");
-  }
-
-  addMachine() {
-    this.menu.close();
-    this.router.navigateByUrl("addmachine");
-  }
-
-  addMachinePart() {
-    this.menu.close();
-    this.router.navigateByUrl("addparts");
-  }
-
-  adminInquiry(inqID) {
-    console.log("ID >>", inqID)
-    this.menu.close();
-    this.router.navigateByUrl('inquirydetails/' + inqID);
+  gotoMerchant(){
 
   }
-   // For User Data
-
+  printer(){
+    
+  }
   getMachineList() {
     if (this.tools.isNetwork()) {
       this.tools.openLoader();
@@ -173,59 +134,7 @@ export class HomePage {
     }
 
   }
-   // For Admin Data
-
-  getAdminInquiryList() {
-    if (this.tools.isNetwork()) {
-      this.tools.openLoader();
-      this.apiService.AdminInqList().subscribe(data => {
-        this.tools.closeLoader();
-
-        let res: any = data;
-        console.log(' Response ', res);
-        this.AdminInqList = res.data.Inquiry;
-        this.ALLAdminInqList = res.data.Inquiry;
-
-      }, (error: Response) => {
-        this.tools.closeLoader();
-        console.log(error);
-
-        let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
-      });
-
-    } else {
-      this.tools.closeLoader();
-    }
-
-  }
-
-    // For Agent Data
-
-    getAgentInquiryList() {
-      if (this.tools.isNetwork()) {
-        this.tools.openLoader();
-        this.apiService.AgentInqList().subscribe(data => {
-          this.tools.closeLoader();
-  
-          let res: any = data;
-          console.log(' Response ', res);
-          this.AgentInqList = res.data.Inquiry;
-          this.ALLAgentInqList = res.data.Inquiry;
-  
-        }, (error: Response) => {
-          this.tools.closeLoader();
-          console.log(error);
-  
-          let err: any = error;
-          this.tools.openAlertToken(err.status, err.error.message);
-        });
-  
-      } else {
-        this.tools.closeLoader();
-      }
-  
-    }
+   
 
   // For User Filter
   async ionChangeUser() {
@@ -239,37 +148,6 @@ export class HomePage {
     this.MachineList = this.MachineList.filter(currentDraw => {
       if (currentDraw.MachineName && searchTerm) {
         return ((currentDraw.MachineName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
-      }
-    });
-  }
-  // For Admin Filter
-  async ionChangeAdmin() {
-    console.log("click >>", this.fullname)
-    this.AdminInqList = await this.ALLAdminInqList;
-    const searchTerm = this.fullname;
-    if (!searchTerm) {
-      return;
-    }
-
-    this.AdminInqList = this.AdminInqList.filter(currentDraw => {
-      if (currentDraw.fullname && searchTerm) {
-        return ((currentDraw.fullname.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (currentDraw.Status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (currentDraw.InqNO.indexOf(searchTerm.toLowerCase()) > -1));
-      }
-    });
-  }
-
-   // For Agent Filter
-   async ionChangeAgent() {
-    console.log("click >>", this.fullname)
-    this.AgentInqList = await this.ALLAgentInqList;
-    const searchTerm = this.fullname;
-    if (!searchTerm) {
-      return;
-    }
-
-    this.AgentInqList = this.AgentInqList.filter(currentDraw => {
-      if (currentDraw.fullname && searchTerm) {
-        return ((currentDraw.fullname.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (currentDraw.Status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (currentDraw.InqNO.indexOf(searchTerm.toLowerCase()) > -1));
       }
     });
   }

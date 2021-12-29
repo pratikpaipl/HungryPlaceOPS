@@ -1,5 +1,4 @@
 <ion-menu side="start" menuId="first">
-
     <ion-content class="menu" no-padding>
         <ion-list no-padding>
             <ion-item class="list-item" (click)="Dashboard()">
@@ -7,19 +6,17 @@
                 <ion-label class="lbl-style-m">Dashboard </ion-label>
             </ion-item>
 
-
             <ion-item class="list-item" (click)="tableBooking()">
                 <ion-img class="menu-img" src="../../../assets/images/tablebook.png"></ion-img>
                 <ion-label class="lbl-style-m">Table Booking</ion-label>
             </ion-item>
-
 
             <ion-item class="list-item" (click)="allClientList()">
                 <ion-img class="menu-img" src="../../../assets/images/allclient.png"></ion-img>
                 <ion-label class="lbl-style-m">All Client List</ion-label>
             </ion-item>
 
-            <ion-item class="list-item" (click)="allClientList()">
+            <ion-item class="list-item" (click)="allOrderList()">
                 <ion-img class="menu-img" src="../../../assets/images/allorder.png"></ion-img>
                 <ion-label class="lbl-style-m">All Order List</ion-label>
             </ion-item>
@@ -78,10 +75,10 @@
         </ion-toolbar>
     </ion-header>
 
-    <ion-content style="background: #fff">
+    <ion-content style="background: #FF0606">
         <!-- Red Portion -->
 
-        <ion-grid class="container" style="background : #FF0606 !important">
+        <ion-grid class="container">
             <ion-row>
                 <ion-col>
                     <ion-row>
@@ -143,7 +140,8 @@
                             <ion-label class="page_title">Select Status</ion-label>
 
                             <div>
-                                <ion-select okText="Ok" placeholder="All status" class="customm_select" cancelText="Dismiss" formControlName='agent' (ionChange)="onChangeState($event.target.value)">
+                                <!-- formControlName='agent' -->
+                                <ion-select okText="Ok" placeholder="All status" class="customm_select" cancelText="Dismiss" (ionChange)="onChangeState($event.target.value)">
                                     <ion-select-option *ngFor="let item of AgentList" value="{{item.id}}">{{item.agentname}}</ion-select-option>
                                 </ion-select>
                             </div>
@@ -154,7 +152,8 @@
                             <ion-label class="page_title">Order Type</ion-label>
 
                             <div>
-                                <ion-select okText="Ok" placeholder="All Type" class="customm_select" cancelText="Dismiss" formControlName='agent' (ionChange)="onChangeState($event.target.value)">
+                                <!-- formControlName='agent' -->
+                                <ion-select okText="Ok" placeholder="All Type" class="customm_select" cancelText="Dismiss" (ionChange)="onChangeState($event.target.value)">
                                     <ion-select-option *ngFor="let item of AgentList" value="{{item.id}}">{{item.agentname}}</ion-select-option>
                                 </ion-select>
                             </div>
@@ -169,14 +168,16 @@
 
 
         <!-- White Portion -->
-        <ion-grid class="container" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
-            <ion-row style="padding: 0;">
-                <ion-col style="padding: 0;" size='12'>
+        <ion-grid class="container" style="border-radius: 20px 20px 0 0 !important; background: white !important;">
+            <ion-row class="p-0">
+                <ion-col class="p-0" size='12'>
 
                     <ion-row class="button_box">
                         <ion-col>
-                            <ion-button class="btn-red" type="submit">Driver Summary</ion-button>
-                            <ion-button class="btn-red" type="submit">Order Summary</ion-button>
+                            <ion-button class="btn-red" (click)="driverSummary()">Driver Summary</ion-button>
+                        </ion-col>
+                        <ion-col>
+                            <ion-button class="btn-red" (click)="ordrerSummary()">Order Summary</ion-button>
                         </ion-col>
                     </ion-row>
 
@@ -212,7 +213,7 @@
                                     <ion-button class="btn-blue">Paypal</ion-button>
                                 </ion-col>
                                 <ion-col>
-                                    <ion-button [ngClass]="{'btn-yallow': inq.Status === 'Pending', 'btn-orange' : inq.Status === 'In Progress','btn-green' : inq.Status === 'Completed','btn-redd' : inq.Status === 'Cancelled' }">{{inq.Status}}</ion-button>
+                                    <!-- <ion-button [ngClass]="{'btn-yallow': inq.Status === 'Pending', 'btn-orange' : inq.Status === 'In Progress','btn-green' : inq.Status === 'Completed','btn-redd' : inq.Status === 'Cancelled' }">{{inq.Status}}</ion-button> -->
                                 </ion-col>
                             </ion-row>
 
@@ -225,7 +226,8 @@
         </ion-grid>
 
         <!-- Empty Portion -->
-        <ion-grid class="container empty-list-box" *ngIf="PartsList?.length == 0">
+        <!-- *ngIf="PartsList?.length == 0" -->
+        <ion-grid class="container empty-list-box">
             <ion-row class="p-0">
                 <ion-col size="12" class="p-0">
                     <ion-label class="empty-list">No Data Available!</ion-label>

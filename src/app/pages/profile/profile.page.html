@@ -3,12 +3,12 @@
         <ion-title>
             <ion-grid style="padding: 5px 8px !important;" no-padding class="header padding-0">
                 <ion-row style="align-items: center;">
-                    <ion-col size="9.7">
+                    <ion-col size="12">
                         <div class="page_had">
                             <ion-buttons (click)="tools.backPage()" no-padding>
-                                <ion-img class="img" src="../../../assets/images/back.png"></ion-img>
+                                <ion-img class="img" src="../../../assets/images/Backwhite.png"></ion-img>
                             </ion-buttons>
-                            <ion-label class="page_title">My Profile</ion-label>
+                            <ion-label class="page_wtitle">Profile</ion-label>
                         </div>
                     </ion-col>
                 </ion-row>
@@ -18,55 +18,24 @@
 </ion-header>
 
 <ion-content>
-    <ion-grid class="container">
-        <ion-row class="p-0" class="pro_infobox">
-            <ion-col class="p-0" size="12">
-                <div class="pro_img">
-                    <ion-label>{{user.username.charAt(0).toUpperCase()}}</ion-label>
-                </div>
-            </ion-col>
-            <ion-col class="p-0" size="12">
-                <div class="pro_content">
-                    <ion-label>{{user.username}}</ion-label>
-                    <ion-label>{{user.email}}</ion-label>
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
 
-    <ion-grid class="container">
+
+    <ion-grid class="info-view">
         <ion-row class="forms_boxs">
             <ion-col size="12" class="p-0">
                 <form [formGroup]="loginForm" (ngSubmit)="Saveprofile()" style="padding: 0 0px;">
                     <div class="form-group">
-                        <ion-input type="text" placeholder="First Name" class="form-control" formControlName='fname'>
+                        <ion-input type="text" style="color: gray !important;" [readonly]="isReadonly" class="form-control" formControlName='username'>
                         </ion-input>
                     </div>
 
                     <div class="form-group">
-                        <ion-input type="text" placeholder="Last Name" class="form-control" formControlName='lname'>
-                        </ion-input>
+                        <ion-input type="text" placeholder="Password" class="form-control" formControlName="password"></ion-input>
                     </div>
-
-                    <div class="form-group" *ngIf="user.roleid==2">
-                        <ion-input type="text" placeholder="Company Name" class="form-control" formControlName='compname'></ion-input>
-                    </div>
-
                     <div class="form-group">
-                        <ion-input type="email" placeholder="Email" class="form-control" formControlName='email'>
-                        </ion-input>
+                        <ion-input type="text" placeholder="Confirm Password" class="form-control" formControlName="cnfpassword"></ion-input>
                     </div>
 
-                    <div class="form-group">
-                        <ion-input type="tel" style="color: gray !important;" [readonly]="isReadonly" maxlength="10" placeholder="Mobile No" class="form-control" formControlName='mobile'></ion-input>
-                    </div>
-
-                    <div class="form-group" *ngIf="user.roleid==2">
-                        <ion-select class="custom_select" [(ngModel)]="Selstatus" [value]="Selstatus" okText="Ok" placeholder="Select Agent" cancelText="Dismiss" formControlName='agent'>
-                            <ion-select-option *ngFor="let item of AgentList" value="{{item.id}}">{{item.agentname}}
-                            </ion-select-option>
-                        </ion-select>
-                    </div>
                     <div class="buttion_box">
                         <ion-button class="btn-red" type="submit">Save</ion-button>
                     </div>

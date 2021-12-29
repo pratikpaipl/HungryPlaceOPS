@@ -1,0 +1,27 @@
+:host {
+    .tab-radio {
+        padding: 10px 0px;
+        display: flex;
+        overflow: auto;
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+    .logo-title {
+        color: black !important;
+    }
+    .form-control {
+        color: black !important;
+    }
+    ion-modal {
+        height: 50% !important;
+        width: 90% !important;
+    }
+    .store-list-container {
+        background-color: #fff;
+        height: calc(100vh - 56px);
+        overflow-y: auto;
+    }
+    .store-list-container ion-row ion-col {
+        text-align: start;
+    }
+}

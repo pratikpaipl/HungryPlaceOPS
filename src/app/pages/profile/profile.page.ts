@@ -17,10 +17,7 @@ export class ProfilePage {
 
   loginForm: FormGroup;
   user: any;
-  AgentList = [];
-//  selectcategory:any;
 
-Selstatus = "";
 
   constructor(public pickerCtrl: PickerController, public tools: Tools, public formBuilder: FormBuilder, private eventService: EventService,
     private activatedRoute: ActivatedRoute, private router: Router, public apiService: ApiService) {
@@ -28,18 +25,14 @@ Selstatus = "";
 
     //this.from = this.activatedRoute.snapshot.paramMap.get('from');
     this.loginForm = this.formBuilder.group({
-      fname: [this.user.first_name, [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-      lname: [this.user.last_name, [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-      compname: [this.user.company_name, [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-      agent: [this.user.agentid, [Validators.required]],
-      mobile: [this.user.phone, [Validators.required, Validators.maxLength(10), Validators.pattern('[0-9]+')]],
-      email: [this.user.email, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      username: ['Ayaz', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+      password: ['', Validators.required],
+      cnfpassword: ['', Validators.required],
 
     });
   }
   ionViewDidEnter() {
-    if(this.user.roleid == 2)
-    this.getAgentList();
+   
   }
 
   login() {
@@ -117,35 +110,7 @@ Selstatus = "";
       }
     }
   }
-  getAgentList() {
-    if (this.tools.isNetwork()) {
-      this.tools.openLoader();
-      this.apiService.AgentList().subscribe(data => {
-        this.tools.closeLoader();
-
-        let res: any = data;
-        console.log(' agent > ', res);
-        this.AgentList = res.data.Agent;
-
-
-        this.loginForm
-        .get("agent")
-        .setValue(this.user.agentid);
-     
-
-      }, (error: Response) => {
-        this.tools.closeLoader();
-        console.log(error);
-
-        let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
-      });
-
-    } else {
-      this.tools.closeLoader();
-    }
-
-  }
+ 
   isReadonly() {return true;}
 
 }

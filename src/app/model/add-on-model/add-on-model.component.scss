@@ -1,0 +1,45 @@
+
+    ion-grid{
+        background: white !important;
+    }
+
+    ion-content {
+        --background: transparent;
+        position: relative;
+    }
+    ion-row.list_blocks ion-col {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+    .tab-radio {
+        padding: 10px 0px;
+        display: inline-table !important;
+        overflow: auto;
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+    ion-radio {
+        margin-inline-end: 5px !important;
+    }
+    .logo-title {
+        color: black !important;
+    }
+    .cat-title {
+        color: black !important;
+        white-space: initial !important;
+    }
+    .form-control {
+        color: black !important;
+    }
+    ion-modal {
+        height: 50% !important;
+        width: 90% !important;
+    }
+    .store-list-container {
+        background-color: #fff;
+        height: calc(100vh - 56px);
+        overflow-y: auto;
+    }
+    .store-list-container ion-row ion-col {
+        text-align: start;
+    }

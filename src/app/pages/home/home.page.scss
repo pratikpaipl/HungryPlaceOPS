@@ -249,11 +249,6 @@ ion-item {
     padding-bottom: 10px;
 }
 
-ion-toolbar {
-    --background: #FF0606 !important;
-    background: #FF0606 !important;
-}
-
 .page_had {
     display: flex;
     align-items: center;
@@ -305,4 +300,9 @@ ion-toolbar {
     border-radius: 5px;
     padding: 14px 12px !important;
     font-family: "Poppins";
+}
+
+ion-content {
+    background: #FF0606 !important;
+    --background: #FF0606 !important;
 }

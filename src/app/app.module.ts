@@ -24,10 +24,12 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import {HTTP} from "@ionic-native/http/ngx";
 import { File } from '@ionic-native/file/ngx';
+import { AddPrefrencesComponent } from './model/add-prefrences/add-prefrences.component';
+import { FilterModelComponent } from './model/filtermodel/filtermodel.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent,AddPrefrencesComponent,FilterModelComponent],
+  entryComponents: [AddPrefrencesComponent,FilterModelComponent],
   imports: [BrowserModule,FormsModule, IonicModule.forRoot({mode:'md', scrollAssist: false}), HttpClientModule,AppRoutingModule,],
   providers: [
     StatusBar,Network, EventService, AuthGuard, WelcomeGuard,Camera,ImagePicker,WebView,HTTP,File,

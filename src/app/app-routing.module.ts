@@ -17,6 +17,30 @@ const routes: Routes = [
     path: 'forgotpassword',
     loadChildren: () => import('./auth/forgotpassword/forgotpassword.module').then(m => m.ForgotPasswordPageModule)
   },
+  {
+    path: 'allclient',
+    loadChildren: () => import('./pages/allclient/allclient.module').then(m => m.AllClientPageModule)
+  },
+  {
+    path: 'ordersumary',
+    loadChildren: () => import('./pages/ordersumary/ordersumary.module').then(m => m.OrderSumaryPageModule)
+  },
+  {
+    path: 'driversumary',
+    loadChildren: () => import('./pages/driversumary/driversumary.module').then(m => m.DriverSumaryPageModule)
+  },
+  {
+    path: 'orderhistory',
+    loadChildren: () => import('./pages/orderhistory/orderhistory.module').then(m => m.OrderHistoryPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
+  },
+  {
+    path: 'orderdetail',
+    loadChildren: () => import('./pages/orderdetail/orderdetail.module').then(m => m.OrderDetailPageModule)
+  },
 ];
 
 @NgModule({
