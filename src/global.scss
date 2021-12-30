@@ -231,7 +231,7 @@ ion-list-header {
 /*-----        Login/Welcom Screen Css End        --------*/
 
 ion-label {
-    font-size: 13px !important;
+    font-size: 15px !important;
     font-family: 'Poppins';
     color: black;
 }
@@ -261,7 +261,7 @@ ion-button {
     --background: #FF0606;
     border: 1px solid #FF0606;
     width: 100%;
-    font-size: 15px !important;
+    font-size: 14px !important;
     float: right;
 }
 
@@ -939,7 +939,7 @@ ion-input {
 
 .search_box {
     border: 1px solid #d5d5d5;
-    margin: 0px;
+    margin: 0px 5px;
     border-radius: 0px;
     display: flex;
     align-items: center;
@@ -1254,4 +1254,75 @@ ion-toolbar {
     height: 4px;
     display: block;
     margin: 15px auto 35px auto;
+}
+
+ion-label.pagetitle {
+    flex: 0 0 100%;
+    font-size: 20px !important;
+    font-family: "Poppins";
+    color: black;
+    font-weight: 700;
+    margin-top: 20px;
+    display: block;
+}
+
+ion-item.form-control {
+    padding: 0 !important;
+    --padding-start: 0px !important;
+    --padding-end: 0px !important;
+}
+
+ion-item.form-control ion-label {
+    color: black !important;
+}
+
+.btn-red i {
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.customm_select {
+    --placeholder-color: #fff;
+    --placeholder-opacity: 1;
+}
+
+ion-select::part(icon) {
+    color: #fff;
+    opacity: 1;
+}
+
+.select-placeholder {
+    color: #fff;
+    opacity: 1 !important;
+}
+
+ion-content.menu ion-item i {
+    display: inline-block;
+    font-size: 22px;
+    width: 50px;
+    color: #fff;
+    text-align: left;
+    line-height: normal;
+}
+
+ion-content.menu ion-item ion-label {
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    letter-spacing: 0.5px;
+}
+
+ion-row.box-des.date_box {
+    margin: 16px 0 !important;
+    font-size: 16px !important;
+    padding: 0px 12px !important;
+}
+
+ion-row.box-des.date_box ion-item {
+    --padding-start: 2px;
+    --padding-end: 2px;
+    --inner-padding-end: 0px;
+    --padding-top: 0px !important;
+    --inner-border-width: 0px !important;
+    border: none !important;
 }

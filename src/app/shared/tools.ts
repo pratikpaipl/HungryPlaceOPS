@@ -158,6 +158,7 @@ export class Tools {
     //         }
     //     }, 8000);
     // }
+    
     async openLoader(msg?, time?) {
         // console.log(' ===> ',msg);
         //  time = time ? 1500:8000

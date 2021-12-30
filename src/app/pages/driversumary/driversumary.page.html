@@ -13,7 +13,7 @@
                     </ion-col>
                     <ion-col size="1">
                         <ion-buttons no-padding (click)="printer()">
-                            <ion-img src="../../../assets/images/printer.png"> </ion-img>
+                            <i class="fas fa-print"></i>
                         </ion-buttons>
                     </ion-col>
                 </ion-row>
@@ -24,8 +24,8 @@
 
 <ion-content style="background: #fff">
     <ion-grid class="container">
-        <ion-row class="box-des">
-            <ion-col size='12'>
+        <ion-row class="box-des date_box">
+            <ion-col size='12' class="p-0">
                 <ion-item>
                     <ion-datetime displayFormat="DD MMM YYYY" pikerFormat="DD MMM YYYY" [(ngModel)]="Date" (ionChange)="onChangeDate($event.target.value)" placeholder="Select Date"></ion-datetime>
                     <ion-icon class="calendar-icon" name="calendar-outline" item-right></ion-icon>

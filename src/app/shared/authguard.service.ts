@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     // if (localStorage.getItem('cui-data') === null || localStorage.getItem('cui-data') === '' ) {
     //   return false;
     // }
-    if (localStorage.getItem('ops_user_data') === null) {
+    if (localStorage.getItem('ops_user_data') === null || localStorage.getItem('cui-data') === '') {
       return false;
     }
     return true;

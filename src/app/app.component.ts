@@ -28,6 +28,31 @@ export class AppComponent {
     this.backButtonEvent();
   }
 
+ 
+  callOneSignal() {
+    this.oneSignal.startInit('4f0eae29-30e6-4ab7-ae8e-6b0b0ff48b53','401339524363');
+
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+    
+    this.oneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when notification is received
+     });
+     
+     this.oneSignal.handleNotificationOpened().subscribe(() => {
+       // do something when a notification is opened
+     });
+     
+ 
+    
+    this.oneSignal.endInit();
+    this.oneSignal.getIds().then((id) => {
+      console.log('userId ==> ',id.userId);
+      console.log('pushToken ==> ',id.pushToken);
+      localStorage.setItem('OSPlayerID',id.userId);
+      
+    });
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -38,27 +63,6 @@ export class AppComponent {
     });
   }
  
-  callOneSignal() {
-    this.oneSignal.startInit('9b0e84fb-5e5c-42dc-8582-84ef7c9e4c52', '546015657170');
-
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
-    
-    
-    this.oneSignal.handleNotificationReceived().subscribe(() => {
-     // do something when notification is received
-    });
-    
-    this.oneSignal.handleNotificationOpened().subscribe(() => {
-      // do something when a notification is opened
-    });
-    
-    this.oneSignal.endInit();
-    this.oneSignal.getIds().then((id) => {
-      console.log('userId ==> ',id.userId);
-      console.log('pushToken ==> ',id.pushToken);
-      localStorage.setItem('PlearID',id.userId);      
-    });
-  }
   backButtonEvent() {
     this.platform.backButton.subscribeWithPriority(999999, async () => {
 

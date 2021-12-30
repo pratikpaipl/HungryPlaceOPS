@@ -113,7 +113,7 @@ export class HomePage {
   getMachineList() {
     if (this.tools.isNetwork()) {
       this.tools.openLoader();
-      this.apiService.MachineList().subscribe(data => {
+      this.apiService.bookNow().subscribe(data => {
         this.tools.closeLoader();
 
         let res: any = data;

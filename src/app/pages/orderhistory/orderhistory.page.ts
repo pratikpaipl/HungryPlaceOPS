@@ -70,32 +70,32 @@ export class OrderHistoryPage {
       "Cancel"
     );
   }
-  deletePart() {
-    if (this.tools.isNetwork()) {
-      let postData = new FormData();
+  // deletePart() {
+  //   if (this.tools.isNetwork()) {
+  //     let postData = new FormData();
 
-      postData.append('agentid', this.Agentid);
+  //     postData.append('agentid', this.Agentid);
 
-      this.tools.openLoader();
-      this.apiService.deleteAgent(postData).subscribe(data => {
-        this.tools.closeLoader();
+  //     this.tools.openLoader();
+  //     this.apiService.deleteAgent(postData).subscribe(data => {
+  //       this.tools.closeLoader();
 
-        let res: any = data;
-        this.getAgentList();
+  //       let res: any = data;
+  //       this.getAgentList();
 
-      }, (error: Response) => {
-        this.tools.closeLoader();
-        console.log(error);
+  //     }, (error: Response) => {
+  //       this.tools.closeLoader();
+  //       console.log(error);
 
-        let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
-      });
+  //       let err: any = error;
+  //       this.tools.openAlertToken(err.status, err.error.message);
+  //     });
 
-    } else {
-      this.tools.closeLoader();
-    }
+  //   } else {
+  //     this.tools.closeLoader();
+  //   }
 
-  }
+  // }
   async deleteAlert(message, btnYes, btnNo) {
     const alert = await this.alertController.create({
       message: message,
@@ -110,7 +110,7 @@ export class OrderHistoryPage {
         {
           text: btnYes ? btnYes : 'Yes',
           handler: () => {
-            this.deletePart();
+           // this.deletePart();
           }
         }
       ], backdropDismiss: true
@@ -118,30 +118,30 @@ export class OrderHistoryPage {
     return await alert.present();
   }
 
-  getAgentList() {
-    if (this.tools.isNetwork()) {
-      this.tools.openLoader();
-      this.apiService.AgentList().subscribe(data => {
-        this.tools.closeLoader();
+  // getAgentList() {
+  //   if (this.tools.isNetwork()) {
+  //     this.tools.openLoader();
+  //     this.apiService.AgentList().subscribe(data => {
+  //       this.tools.closeLoader();
 
-        let res: any = data;
-        console.log(' agent > ', res);
-        this.AgentList = res.data.Agent;
-        this.itemsAll = res.data.Agent;
+  //       let res: any = data;
+  //       console.log(' agent > ', res);
+  //       this.AgentList = res.data.Agent;
+  //       this.itemsAll = res.data.Agent;
 
-      }, (error: Response) => {
-        this.tools.closeLoader();
-        console.log(error);
+  //     }, (error: Response) => {
+  //       this.tools.closeLoader();
+  //       console.log(error);
 
-        let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
-      });
+  //       let err: any = error;
+  //       this.tools.openAlertToken(err.status, err.error.message);
+  //     });
 
-    } else {
-      this.tools.closeLoader();
-    }
+  //   } else {
+  //     this.tools.closeLoader();
+  //   }
 
-  }
+  // }
 
   // For Filter
   async ionChange(){

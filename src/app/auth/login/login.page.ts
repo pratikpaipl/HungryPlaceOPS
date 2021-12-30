@@ -24,7 +24,7 @@ export class LoginPage {
    // this.from = this.activatedRoute.snapshot.paramMap.get('from');
  
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -34,17 +34,14 @@ export class LoginPage {
   }
 
   login() {
-    let email = this.loginForm.get('email').value;
+    let username = this.loginForm.get('username').value;
     let password = this.loginForm.get('password').value;
 
     var msg = ''
 
-    if (this.loginForm.get('email').invalid) {
-      if (email == '') {
-        msg = msg + 'Enter your email address<br />'
-      } else {
-        msg = msg + 'Please enter a valid email address<br />'
-      }
+    
+    if (username == '') {
+      msg = msg + 'Please enter Username<br />'
     }
     if (password == '') {
       msg = msg + 'Please enter Password<br />'
@@ -55,11 +52,14 @@ export class LoginPage {
     } else {
       if (this.tools.isNetwork()) {
         this.tools.openLoader();
-        this.apiService.login(email,password).subscribe(response => {
+        this.apiService.login(username,password).subscribe(response => {
           this.tools.closeLoader();
           let res: any = response;
-          this.loginForm.reset();
-        this.router.navigateByUrl('otpverification/' + res.data.DefaultOTP + '/' + res.data.phone);
+          console.log("res >>",res);
+          //this.loginForm.reset();
+          // localStorage.setItem('login_token', res.login_token);
+          // this.apiService.setUserData(res.data.user, res.login_token);
+          // this.router.navigateByUrl('/home', { replaceUrl: true }); 
         }, (error: Response) => {
           let err: any = error;        
           console.log('Api Error ', err);
@@ -74,6 +74,7 @@ export class LoginPage {
       }
     }
   }
+
 
   forgotPassword(){
     this.router.navigateByUrl('forgotpassword');
