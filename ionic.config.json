@@ -1,0 +1,10 @@
+{
+    "name": "OPS",
+    "integrations": {
+        "capacitor": {
+            "enabled": false
+        },
+        "cordova": {}
+    },
+    "type": "angular"
+}
