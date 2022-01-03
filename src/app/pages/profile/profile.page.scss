@@ -67,3 +67,17 @@ ion-row.forms_boxs {
 	margin-top: 4px !important;
 	font-size: 15px !important;
 }
+
+
+.form-control {
+	--background: transparent;
+	background: transparent;
+	--ion-background-color: transparent;
+	--highlight-color-focused: black;
+	--border-color: transparent;
+	border: 1px solid #d5d5d5 !important;
+	color: #000 !important;
+	font-size: 16px !important;
+	padding: 6px 8px !important;
+	border-radius: 5px;
+}

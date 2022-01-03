@@ -23,19 +23,16 @@
 </ion-header>
 
 <ion-content style="background: #fff">
-    <ion-grid class="container" style="margin-top: 10px !important;">
-        <ion-row class="box-des p-0 mt-20">
-            <ion-col class="content_col" size="12">
-                <ion-row>
-                    <ion-col class="left_col" size="10">
-                        <ion-label class="page_title">Resturant Copy</ion-label>
-                    </ion-col>
-                    <ion-col class="right_col" size="2">
-                        <ion-checkbox [(ngModel)]="terms" [ngModelOptions]="{standalone: true}"></ion-checkbox>
-                    </ion-col>
-                </ion-row>
+    <ion-grid class="container">
+        <ion-row class="p-0"> 
+            <ion-col size="12" class="p-0">
+                <ion-list class="chklist">
+                    <ion-item>
+                      <ion-label>Resturant Copy</ion-label>
+                      <ion-checkbox slot="end" [(ngModel)]="terms" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+                    </ion-item>
+                  </ion-list>
             </ion-col>
-
         </ion-row>
     </ion-grid>
 </ion-content>

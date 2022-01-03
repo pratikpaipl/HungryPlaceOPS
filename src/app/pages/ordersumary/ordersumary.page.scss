@@ -79,15 +79,23 @@
 // }
 .ordersum ion-col.right_col {
     text-align: right !important;
-    flex: 69px !important;
-    max-width: 69px !important;
+    flex: 80px !important;
+    max-width: 80px !important;
+    padding-right: 0px !important;
 }
 
 .ordersum ion-col.left_col {
-    max-width: calc(100% - 70px);
+    max-width: calc(100% - 81px);
+    padding-left: 0px !important;
 }
 
 .btn-red {
-    float: none;
-    margin-top: 15px;
+	float: none;
+	margin: 15px 0 20px 0;
+}
+
+.box-des ion-label {
+	margin: 0px !important;
+	font-size: 13px !important;
+	padding: 0px !important;
 }

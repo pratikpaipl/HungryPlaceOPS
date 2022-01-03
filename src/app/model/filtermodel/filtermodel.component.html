@@ -3,16 +3,16 @@
     <ion-grid class="container">
         <ion-row>
             <ion-col>
-                <ion-row>
-                    <ion-col size="10">
+                <ion-row class="fix_col">
+                    <ion-col class="title_col">
                         <ion-label class="d-block tiitle f-25">Order Filter</ion-label>
                     </ion-col>
-                    <ion-col size="2">
+                    <ion-col class="btn_col">
                         <ion-label class="d-block f-20" style="color: red !important; ">Reset</ion-label>
                     </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col size="12" style="margin-top: 10px;">
+                <ion-row class="labels_row">
+                    <ion-col size="12">
                         <ion-label class="d-block tiitle f-15">Select status</ion-label>
                     </ion-col>
                 </ion-row>
@@ -23,8 +23,8 @@
                         </ion-select>
                     </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col size="12" style="margin-top: 10px;">
+                <ion-row class="labels_row">
+                    <ion-col size="12">
                         <ion-label class="d-block tiitle f-15">Order Type</ion-label>
                     </ion-col>
                 </ion-row>
@@ -35,8 +35,8 @@
                         </ion-select>
                     </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col size="12" style="margin-top: 10px;">
+                <ion-row class="labels_row">
+                    <ion-col size="12">
                         <ion-label class="d-block tiitle f-15">Order From Date</ion-label>
                     </ion-col>
                 </ion-row>
@@ -48,8 +48,8 @@
                         </ion-item>
                     </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col size="12" style="margin-top: 10px;">
+                <ion-row class="labels_row">
+                    <ion-col size="12">
                         <ion-label class="d-block tiitle f-15">Order To Date</ion-label>
                     </ion-col>
                 </ion-row>
@@ -61,8 +61,8 @@
                         </ion-item>
                     </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col size="12" style="margin-top: 10px;">
+                <ion-row class="labels_row">
+                    <ion-col size="12">
                         <ion-label class="d-block tiitle f-15">Sort by</ion-label>
                     </ion-col>
                 </ion-row>
@@ -73,8 +73,10 @@
                         </ion-select>
                     </ion-col>
                 </ion-row>
-                <ion-row style="margin-top: 15px;">
+                <ion-row class="labels_row">
+                    <ion-col size="12">
                     <ion-button class="btn-red" type="submit">Submit</ion-button>
+                    </ion-col>
                 </ion-row>
             </ion-col>
         </ion-row>

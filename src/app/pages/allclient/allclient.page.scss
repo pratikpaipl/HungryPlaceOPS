@@ -4,6 +4,7 @@
     border-radius: 5px !important;
     margin: 10px;
     padding: 5px;
+    overflow: hidden;
 }
 
 .box-dess {
@@ -85,9 +86,20 @@
 .right_col {
     text-align: right;
 }
-
 .labell {
-    font-size: 13px !important;
-    font-family: "Poppins";
-    color: black;
+	font-size: 14px !important;
+	font-family: "Poppins";
+	color: black;
+	padding: 5px 0px !important;
+}
+
+.box-des .left_col {
+	flex: 0 0 100px;
+	max-width: 100px;
+    padding-left: 0px !important;
+}
+.box-des .right_col {
+	max-width: calc(100% - 101px);
+	flex: 0 0 100%;
+	padding-right: 0px !important;
 }

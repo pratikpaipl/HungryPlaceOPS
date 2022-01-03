@@ -75,7 +75,7 @@
         </ion-toolbar>
     </ion-header>
 
-    <ion-content style="background: #FF0606">
+    <ion-content>
         <ion-grid class="container">
             <ion-row class="tab_list">
                 <ion-col class="tab_nav">
@@ -132,8 +132,6 @@
             </ion-row>
         </ion-grid>
 
-
-        <!-- White Portion -->
         <ion-grid class="container" style="margin-bottom: 50px; border-radius: 20px 20px 0 0 !important; background: white !important;">
             <ion-row class="p-0">
                 <ion-col class="p-0" size='12'>
@@ -211,7 +209,7 @@
             </ion-row>
         </ion-grid>
 
-        <!-- Empty Portion -->
+     
         <ion-grid class="container empty-list-box" *ngIf="TodayOrderList?.length == 0">
             <ion-row class="p-0">
                 <ion-col size="12" class="p-0">
@@ -219,7 +217,6 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
-
-
+        
     </ion-content>
 </ion-router-outlet>

@@ -1,3 +1,10 @@
+ion-content {
+	background: #FF0606 !important;
+	--background: #FF0606 !important;
+}
+
+
+
 .img-loc {
     height: 20px;
     position: absolute;
@@ -247,13 +254,13 @@ ion-item {
     align-items: center;
 }
 
-.page_had .page_title {
-    flex: 0 0 100%;
-    max-width: calc(100% - 25px);
-    font-size: 16px !important;
-    font-family: 'Poppins';
-    color: white;
-    text-align: center !important;
+.page_had .page_title{
+	flex: 0 0 100%;
+	max-width: calc(100% - 25px);
+	font-size: 18px !important;
+	color: white;
+	text-align: center !important;
+	font-family: 'Poppins-SemiBold';
 }
 
 .page_title {
@@ -284,21 +291,19 @@ ion-item {
 }
 
 .customm_select {
-    --ion-background-color: transparent;
-    --highlight-color-focused: #fff;
-    --border-color: transparent;
-    border: 1.5px solid #fff;
-    color: #fff !important;
-    font-size: 15px !important;
-    border-radius: 5px;
-    padding: 14px 12px !important;
-    font-family: "Poppins";
+	--ion-background-color: transparent;
+	--highlight-color-focused: #fff;
+	--border-color: transparent;
+	border: 1.5px solid #fff;
+	color: #fff !important;
+	font-size: 15px !important;
+	border-radius: 5px;
+	padding: 10px 12px !important;
+	font-family: "Poppins";
+	margin-bottom: 10px;
 }
 
-ion-content {
-    background: #FF0606 !important;
-    --background: #FF0606 !important;
-}
+
 
 ion-row.tab_list {
     background: transparent;
@@ -408,4 +413,13 @@ ion-col.tab_nav {
 
 .info_box .info_sta.orange {
     background-color: orange !important;
+}
+
+
+.button_box {
+	margin: 0px -6px !important;
+	margin-top: 15px !important;
+}
+.button_box ion-col{
+	padding: 0px 6px !important;
 }

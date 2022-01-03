@@ -889,19 +889,19 @@ img.back-btn {
 .page_had ion-label.page_title {
     flex: 0 0 100%;
     max-width: calc(100% - 25px);
-    font-size: 20px !important;
-    font-family: 'Poppins';
+    font-size: 18px !important;
+    font-family: 'Poppins-SemiBold';
     color: black;
     text-align: center !important;
 }
 
 .page_had ion-label.page_wtitle {
-    flex: 0 0 100%;
-    max-width: calc(100% - 25px);
-    font-size: 20px !important;
-    font-family: 'Poppins';
-    color: white;
-    text-align: center !important;
+	flex: 0 0 100%;
+	max-width: calc(100% - 25px);
+	font-size: 18px !important;
+	color: white;
+	text-align: center !important;
+	font-family: 'Poppins-SemiBold';
 }
 
 .box-des ion-label.content {
@@ -964,7 +964,7 @@ ion-input {
 
 .search_box {
     border: 1px solid #d5d5d5;
-    margin: 0px 5px;
+    margin: 0px !important;
     border-radius: 0px;
     display: flex;
     align-items: center;
@@ -1180,7 +1180,8 @@ cimg {
 }
 
 .container.empty-list-box {
-    padding: 200px 10px !important;
+	padding: 100px 0;
+	height: calc(100vh - 330px) !important;
 }
 
 .form-group.contact_info {
@@ -1344,16 +1345,36 @@ ion-row.box-des.date_box {
 }
 
 ion-row.box-des.date_box ion-item {
-    --padding-start: 2px;
-    --padding-end: 2px;
-    --inner-padding-end: 0px;
-    --padding-top: 0px !important;
-    --inner-border-width: 0px !important;
-    border: none !important;
+	--padding-start: 0;
+	--padding-end: 0;
+	--inner-padding-end: 0px;
+	--padding-top: 0px !important;
+	--inner-border-width: 0px !important;
+	border: none !important;
+	--border-width: 0px !important;
+}
+
+ion-datetime {
+	--padding-bottom: 0;
+	--padding-start: 0px;
+	--padding-top: 0px;
 }
 
 .graytxt {
     font-size: 13px !important;
     font-family: 'Poppins';
     color: #9e9e9e !important;
+}
+
+
+ion-radio {
+    --color-checked:#FF0606 !important;
+}
+
+[aria-checked="true"].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md {
+	border-color: #FF0606 !important;
+}
+
+.alert-radio-inner.sc-ion-alert-md {
+	background-color: #FF0606 !important;
 }
