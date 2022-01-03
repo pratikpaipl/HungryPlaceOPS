@@ -7,7 +7,7 @@ const routes: Routes = [
 
   {
   //  path: 'home', canActivate: [AuthGuard],
-    path: 'home', 
+    path: 'home',  canActivate: [AuthGuard],
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   }, {
     path: 'login',
@@ -40,6 +40,18 @@ const routes: Routes = [
   {
     path: 'orderdetail',
     loadChildren: () => import('./pages/orderdetail/orderdetail.module').then(m => m.OrderDetailPageModule)
+  },
+  {
+    path: 'printersetup',
+    loadChildren: () => import('./pages/printersetup/printersetup.module').then(m => m.PrinterSetupPageModule)
+  },
+  {
+    path: 'printeroption',
+    loadChildren: () => import('./pages/printeroption/printeroption.module').then(m => m.PrinterOptionPageModule)
+  },
+  {
+    path: 'orderrefund',
+    loadChildren: () => import('./pages/orderrefund/orderrefund.module').then(m => m.OrderRefundPageModule)
   },
 ];
 

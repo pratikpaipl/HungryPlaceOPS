@@ -1,3 +1,7 @@
+import { DeclineComponent } from './model/decline/decline.component';
+import { AcceptComponent } from './model/accept/accept.component';
+import { AddOnModelComponent } from './model/add-on-model/add-on-model.component';
+import { AddPrinterModelComponent } from './model/addprinter/addprinter.component';
 import { FormsModule } from '@angular/forms';
 import { WelcomeGuard } from './shared/welcomGuard.service';
 import { AuthGuard } from './shared/authguard.service';
@@ -26,10 +30,16 @@ import {HTTP} from "@ionic-native/http/ngx";
 import { File } from '@ionic-native/file/ngx';
 import { AddPrefrencesComponent } from './model/add-prefrences/add-prefrences.component';
 import { FilterModelComponent } from './model/filtermodel/filtermodel.component';
+import { AssignDriverModelComponent } from './model/assigndriver/assigndriver.component';
+import { ChangeStatusModelComponent } from './model/changestatus/changestatus.component';
 
 @NgModule({
-  declarations: [AppComponent,AddPrefrencesComponent,FilterModelComponent],
-  entryComponents: [AddPrefrencesComponent,FilterModelComponent],
+  declarations: [AppComponent,AddPrefrencesComponent,FilterModelComponent,DeclineComponent,
+    AssignDriverModelComponent,ChangeStatusModelComponent,
+    AddPrinterModelComponent,AddOnModelComponent,AcceptComponent],
+  entryComponents: [AddPrefrencesComponent,FilterModelComponent,DeclineComponent,
+    AssignDriverModelComponent,ChangeStatusModelComponent,
+    AddPrinterModelComponent,AddOnModelComponent,AcceptComponent],
   imports: [BrowserModule,FormsModule, IonicModule.forRoot({mode:'md', scrollAssist: false}), HttpClientModule,AppRoutingModule,],
   providers: [
     StatusBar,Network, EventService, AuthGuard, WelcomeGuard,Camera,ImagePicker,WebView,HTTP,File,

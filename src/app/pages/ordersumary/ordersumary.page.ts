@@ -13,8 +13,9 @@ import { ActionSheetController, AlertController, ModalController } from '@ionic/
 })
 export class OrderSumaryPage {
   Date: any;
+  data= "";
   time = 0;
-  newDate: string;
+
   myDate: String = new Date().toISOString();
 
   constructor(public tools: Tools, private route: ActivatedRoute,
@@ -24,19 +25,45 @@ export class OrderSumaryPage {
     public formBuilder: FormBuilder, private eventService: EventService,
     private apiService: ApiService, private router: Router) {
 
-      this.myDate = new Date(this.time + (1000 * 60 * 60 * 24)).toISOString();
-
-
+      //this.myDate = new Date(this.time + (1000 * 60 * 60 * 24)).toISOString();
+      this.Date = this.myDate.split('T')[0];
   }
-  ionViewDidEnter() {
-    //this.getAgentList();
+
+  ngOnInit() { 
+    this.getOrderSummary();
   }
 
   onChangeDate(date) {
-    console.log('Sel Date', date)
-    let selDate = this.Date.split('T')[0];
-    console.log('Selected Date split ', selDate.split('-'));
-    this.newDate = selDate.split('-')[2] + '.' + selDate.split('-')[1] + '.' + selDate.split('-')[0]
+    console.log('Sel Date >>>>>>>>>>>>>>', date)
+    this.myDate= this.Date.split('T')[0];
+  //  this.newDate = selDate.split('-')[2] + '.' + selDate.split('-')[1] + '.' + selDate.split('-')[0]
+    this.getOrderSummary();
   }
   
+  getOrderSummary() {
+    if (this.tools.isNetwork()) {
+      this.tools.openLoader();
+      this.apiService.getOrderSummary(this.myDate).subscribe(data => {
+        this.tools.closeLoader();
+
+        let res: any = data;
+        console.log(' Response >>> ', res.details);
+        this.data=res.details;
+        console.log(' Response ::: ', this.data);
+
+
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
+
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
+      });
+
+    } else {
+      this.tools.closeLoader();
+    }
+
+  }
+   
 }

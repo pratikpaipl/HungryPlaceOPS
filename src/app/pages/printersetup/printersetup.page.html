@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <ion-grid style="padding: 5px 8px !important;" no-padding class="header padding-0">
+                <ion-row style="align-items: center;">
+                    <ion-col size="11">
+                        <div class="page_had">
+                            <ion-buttons (click)="tools.backPage()" no-padding>
+                                <ion-img class="img" src="../../../assets/images/Backwhite.png"></ion-img>
+                            </ion-buttons>
+                            <ion-label class="page_wtitle">Printer Setup</ion-label>
+                        </div>
+                    </ion-col>
+                    <ion-col size="1">
+                        <ion-buttons no-padding (click)="printer()">
+                            <i class="fas fa-print"></i>
+                        </ion-buttons>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background: #fff">
+    <ion-grid class="container" style="margin-top: 10px !important;">
+
+        <ion-row class="box-des p-0" style="margin-top: 15px;">
+            <ion-col class="content_col" size="12" style="background: #f6f6f6;">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block f-20">Primary Printer</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col" size="6">
+                        <ion-label class="d-block f-13">Printer IP</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col" size="6">
+                        <ion-input type="text" placeholder="Enter IP Address"></ion-input>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col" size="10">
+                        <ion-label class="d-block f-13" style="color: red !important;">Not Connected</ion-label>
+                    </ion-col>
+                    <ion-col class="right_col deletes" size="2">
+                        <i class="fas fa-trash-alt"></i>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="button_box">
+            <ion-col>
+                <ion-button class="btn-red" (click)="clickaddprinter()">ADD PRINTER</ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button class="btn-green" (click)="savechanges()">Save changes</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

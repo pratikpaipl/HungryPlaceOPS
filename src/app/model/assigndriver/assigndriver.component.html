@@ -1,0 +1,39 @@
+<ion-content>
+    <span class="shaprator"></span>
+    <ion-grid class="container">
+        <ion-row>
+            <ion-col>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-label class="logo-title">Assign Driver</ion-label>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col class="right_col" size="12">
+                        <!-- <ion-radio-group *ngIf="item.multi_option == 'one'" class="tab-radio" (ionChange)="itemAdd($event,item.sub_item,item.subcat_id)">
+                    <ion-item *ngFor="let price of item.sub_item" style="width: 90vh; --inner-border-width: 0;">
+                        <ion-radio value="{{price.sub_item_id}}" slot="start" [(ngModel)]="price.sub_item_id" [checked]="price.isChecked"> </ion-radio>
+                        <ion-label class="cat-title"> {{price.sub_item_name}} {{ price.price | currency :'GBP':'symbol':'1.2-2' }} </ion-label>
+                    </ion-item>
+                </ion-radio-group> -->
+
+                        <ion-radio-group class="tab-radio" [(ngModel)]="defValue" (ionChange)="itemSelProd($event)">
+                            <ion-item style="width: 90vh; --inner-border-width: 0;">
+                                <ion-radio value="fullrefund" slot="start"> </ion-radio>
+                                <ion-label class="cat-title"> Full Refund</ion-label>
+                            </ion-item>
+                        </ion-radio-group>
+                    </ion-col>
+                </ion-row>
+
+
+                <ion-row class="button_box">
+                    <ion-button class="btn-red" type="submit">Submit</ion-button>
+                </ion-row>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

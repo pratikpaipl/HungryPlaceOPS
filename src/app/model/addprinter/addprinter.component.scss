@@ -24,10 +24,11 @@
     .store-list-container ion-row ion-col {
         text-align: start;
     }
-    .button_box {
-        margin-top: 20px;
+    ion-item {
+        --min-height: 40px;
     }
-    .logo-title {
-        font-size: 20px !important;
+    ion-datetime {
+        --padding-top: 0px !important;
+        --padding-bottom: 0px !important;
     }
 }

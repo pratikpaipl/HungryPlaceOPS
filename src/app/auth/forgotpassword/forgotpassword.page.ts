@@ -46,9 +46,7 @@ export class ForgotPasswordPage {
           this.tools.closeLoader();
           let res: any = response;
           this.loginForm.reset();
-          localStorage.setItem('login_token', res.login_token);
-          this.apiService.setUserData(res.data.user, res.login_token);
-          this.router.navigateByUrl('/home', { replaceUrl: true }); 
+          this.tools.backPage();
         
         }, (error: Response) => {
           let err: any = error;        

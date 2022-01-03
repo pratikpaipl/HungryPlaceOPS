@@ -128,20 +128,40 @@ export class ApiService {
   // }
   
   forgotPassword(email): any {
-    var httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*',
-        // 'Authorization': this.bacisAuth,
-        'api-key': environment.apikey,
-      })
-    }
+   
     let postData = new FormData();
-    // postData.append('file', imageFile);
-    postData.append("email", email);
-    return this.http.post(environment.BaseUrl + 'Register/forgot_password', postData, httpOptions);
+    postData.append("email_address", email);
+    return this.http.post(environment.BaseUrl + 'ForgotPassword', postData, this.httpOptions);
   }
 
+  GetIpaddressDefaulttime(): any {
+    let postData = new FormData();
+    return this.http.post(environment.BaseUrl + 'getIpaddressDefaulttime', postData, this.httpOptions);
+  }
+  UpdateMerchantTimings(DTime): any {
+    let postData = new FormData();
+    postData.append("time", DTime);
 
+    return this.http.post(environment.BaseUrl + 'UpdateMerchantTimings', postData, this.httpOptions);
+  }
+  UpdatePickupTimings(ColTime): any {
+    let postData = new FormData();
+    postData.append("time", ColTime);
+
+    return this.http.post(environment.BaseUrl + 'UpdatePickupTimings', postData, this.httpOptions);
+  }
+  getOrderSummary(date): any {
+    let postData = new FormData();
+    postData.append("date", date);
+
+    return this.http.post(environment.BaseUrl + 'AcceptedOrderList', postData, this.httpOptions);
+  }
+  getDriverSummary(date): any {
+    let postData = new FormData();
+    postData.append("date", date);
+
+    return this.http.post(environment.BaseUrl + 'DriversCollectionList', postData, this.httpOptions);
+  }
 
 
 

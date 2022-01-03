@@ -102,9 +102,9 @@
                     <div class="qty_box">
                         <ion-label class="qty-title">Collection Time</ion-label>
                         <div class="qty-box">
-                            <ion-img class="button_img" src="../../../assets/images/btnminus.png" (click)="CTqty(part,i, 'min') "></ion-img>
-                            <ion-label class="red_tittle">0</ion-label>
-                            <ion-img class="button_img" src="../../../assets/images/btnplus.png" (click)="CTqty(part,i, 'add') "></ion-img>
+                            <ion-img class="button_img" src="../../../assets/images/btnminus.png" (click)="CTqty(CTQty, 'min') "></ion-img>
+                            <ion-label class="red_tittle">{{CTQty}}</ion-label>
+                            <ion-img class="button_img" src="../../../assets/images/btnplus.png" (click)="CTqty(CTQty, 'add') "></ion-img>
                         </div>
                         <ion-label class="qty-content">Minutes</ion-label>
                     </div>
@@ -115,8 +115,8 @@
                 <ion-col size="6">
                     <ion-label class="page_title">Select Status</ion-label>
                     <div class="mt-5">
-                        <ion-select okText="Ok" placeholder="All status" class="customm_select" cancelText="Dismiss" (ionChange)="onChangeState($event.target.value)">
-                            <ion-select-option *ngFor="let item of AgentList" value="{{item.id}}">{{item.agentname}}</ion-select-option>
+                        <ion-select okText="Ok" placeholder="All status" class="customm_select" cancelText="Dismiss" (ionChange)="onChangeOrderType($event.target.value)">
+                            <ion-select-option *ngFor="let status of statusList" value="{{status}}">{{status}}</ion-select-option>
                         </ion-select>
                     </div>
                 </ion-col>
@@ -124,8 +124,8 @@
                     <ion-label class="page_title">Order Type</ion-label>
                     <div class="mt-5">
                         <!-- formControlName='agent' -->
-                        <ion-select okText="Ok" placeholder="All Type" class="customm_select" cancelText="Dismiss" (ionChange)="onChangeState($event.target.value)">
-                            <ion-select-option *ngFor="let item of AgentList" value="{{item.id}}">{{item.agentname}}</ion-select-option>
+                        <ion-select okText="Ok" placeholder="All Type" class="customm_select" cancelText="Dismiss" (ionChange)="onChangeOrderType($event.target.value)">
+                            <ion-select-option *ngFor="let item of orderTypeList" value="{{item}}">{{item}}</ion-select-option>
                         </ion-select>
                     </div>
                 </ion-col>
@@ -134,7 +134,7 @@
 
 
         <!-- White Portion -->
-        <ion-grid class="container" style="border-radius: 20px 20px 0 0 !important; background: white !important; margin-top: 15px;">
+        <ion-grid class="container" style="margin-bottom: 50px; border-radius: 20px 20px 0 0 !important; background: white !important;">
             <ion-row class="p-0">
                 <ion-col class="p-0" size='12'>
                     <ion-row class="button_box" style="margin-top: 10px;">
@@ -154,49 +154,52 @@
                             </div>
                         </ion-col>
                     </ion-row>
+
                     <ion-row class="p-0">
                         <ion-col class="p-0">
                             <ion-label class="d-block mt-10">Today's Orders</ion-label>
                         </ion-col>
                     </ion-row>
 
-                    <ion-row class="box-black">
+                    <ion-row class="box-black" *ngFor="let order of TodayOrderList ;">
                         <ion-col class="list_cols">
-                            <ion-img style="position: absolute; top: 0px; left: 0px; width: 40px; z-index: 1;" src="../../../assets/images/new.png"></ion-img>
+                            <ion-img style="position: absolute; top: 0px; left: 0px; width: 40px; z-index: 1;" src="../../../assets/images/new.png" *ngIf="order.viewed=='1'"></ion-img>
                             <ion-row class="content_row">
                                 <ion-col class="right_col">
                                     <div class="info_box">
-                                        <div class="info_sta orange">
-                                            <img class="sta-img" src="../../../assets/images/scotter.png" />
+                                        <div class="info_sta" [ngClass]="{'orange': order.status_raw === 'pending', 'green' : order.status_raw === 'accepted','red' : order.status_raw === 'cancelled'}">
+                                            <img class="sta-img" src="../../../assets/images/scotter.png" *ngIf="order.trans_type_raw=='delivery'" />
+                                            <img class="sta-img" src="../../../assets/images/bag.png" *ngIf="order.trans_type_raw=='pickup'" />
                                         </div>
-                                        <!-- <div class="info_sta green">
-                                            <img class="sta-img" src="../../../assets/images/bag.png" />
-                                        </div>
-                                        <div class="info_sta red">
-                                            <img class="sta-img" src="../../../assets/images/scotter.png" />
-                                        </div> -->
 
                                         <div class="info_content">
-                                            <ion-label class="d-block title f-15">Ayaz</ion-label>
-                                            <ion-label class="d-block">$ 00</ion-label>
+                                            <ion-label class="d-block title f-15">{{order.customer_name}}</ion-label>
+                                            <ion-label class="d-block">{{order.total_w_tax_prety}}</ion-label>
                                         </div>
                                     </div>
                                 </ion-col>
                                 <ion-col class="left_col" style="text-align: right;">
-                                    <ion-label class="d-block">Order ID :0000</ion-label>
-                                    <ion-label class="d-block">00 Dec 0000 00:00 PM</ion-label>
+                                    <ion-label class="d-block">Order ID : #{{order.order_id}}</ion-label>
+                                    <ion-label class="d-block">{{order.delivery_date}} - {{order.delivery_time}}</ion-label>
                                 </ion-col>
                             </ion-row>
 
                             <ion-row>
                                 <ion-col>
-                                    <ion-button class="btn-yallow">Collection</ion-button>
+                                    <ion-button class="btn-orange">{{order.trans_type_raw=="pickup"?'Collection':order.trans_type_raw}}</ion-button>
                                 </ion-col>
                                 <ion-col>
-                                    <ion-button class="btn-blue">Paypal</ion-button>
+                                    <ion-button class="btn-blue">{{order.payment_type}}</ion-button>
                                 </ion-col>
                                 <ion-col>
-                                    <!-- <ion-button [ngClass]="{'btn-yallow': inq.Status === 'Pending', 'btn-orange' : inq.Status === 'In Progress','btn-green' : inq.Status === 'Completed','btn-redd' : inq.Status === 'Cancelled' }">{{inq.Status}}</ion-button> -->
+                                    <ion-button [ngClass]="{'btn-orange': order.status === 'Pending',
+                                     'btn-green' : order.status === 'Delivered',
+                                     'btn-orange' : order.status === 'Refunded Fully',
+                                     'btn-orange' : order.status === 'Refunded Partially',
+                                     'btn-green' : order.status === 'Accepted',
+                                     'btn-blue' : order.status === 'Assigned',
+                                     'btn-redd' : order.status === 'Cancelled'}">
+                                        {{order.status}}</ion-button>
                                 </ion-col>
                             </ion-row>
 
@@ -209,11 +212,10 @@
         </ion-grid>
 
         <!-- Empty Portion -->
-        <!-- *ngIf="PartsList?.length == 0" -->
-        <ion-grid class="container empty-list-box">
+        <ion-grid class="container empty-list-box" *ngIf="TodayOrderList?.length == 0">
             <ion-row class="p-0">
                 <ion-col size="12" class="p-0">
-                    <ion-label class="empty-list">No Data Available!</ion-label>
+                    <ion-label class="empty-list">No Current Orders</ion-label>
                 </ion-col>
             </ion-row>
         </ion-grid>

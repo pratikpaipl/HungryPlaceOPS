@@ -46,8 +46,23 @@
     align-items: flex-end;
 }
 
+.change-accept-modal {
+    --height: 45%;
+    align-items: flex-end;
+}
+
 .change-filter-modal {
     --height: 85%;
+    align-items: flex-end;
+}
+
+.change-addprinter-modal {
+    --height: 55%;
+    align-items: flex-end;
+}
+
+.change-assign-modal {
+    --height: 70%;
     align-items: flex-end;
 }
 
@@ -260,6 +275,16 @@ ion-button {
     background: #FF0606;
     --background: #FF0606;
     border: 1px solid #FF0606;
+    width: 100%;
+    font-size: 14px !important;
+    float: right;
+}
+
+.btn-greenn {
+    height: 50px;
+    background: green;
+    --background: green;
+    border: 1px solid green;
     width: 100%;
     font-size: 14px !important;
     float: right;
@@ -1058,7 +1083,7 @@ cimg {
     --highlight-color-focused: black;
     --border-color: transparent;
     border: 0px solid #fff;
-    border-bottom: 1px solid #cacaca;
+    border-bottom: 1px solid #000;
     color: #fff;
     font-size: 13px !important;
 }
@@ -1083,7 +1108,7 @@ cimg {
 .search_compo {
     z-index: 11111;
     position: fixed;
-    top: 56px;
+    top: 65px;
     background: #fff;
     width: 100%;
 }
@@ -1325,4 +1350,10 @@ ion-row.box-des.date_box ion-item {
     --padding-top: 0px !important;
     --inner-border-width: 0px !important;
     border: none !important;
+}
+
+.graytxt {
+    font-size: 13px !important;
+    font-family: 'Poppins';
+    color: #9e9e9e !important;
 }

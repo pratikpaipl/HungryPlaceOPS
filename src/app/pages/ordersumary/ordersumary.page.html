@@ -13,7 +13,7 @@
                     </ion-col>
                     <ion-col size="1">
                         <ion-buttons no-padding (click)="printer()">
-                            <ion-img src="../../../assets/images/printer.png"> </ion-img>
+                            <i class="fas fa-print"></i>
                         </ion-buttons>
                     </ion-col>
                 </ion-row>
@@ -24,8 +24,8 @@
 
 <ion-content style="background: #fff">
     <ion-grid class="container">
-        <ion-row class="box-des">
-            <ion-col size='12'>
+        <ion-row class="box-des date_box">
+            <ion-col size='12' class="p-0">
                 <ion-item>
                     <ion-datetime displayFormat="DD MMM YYYY" pikerFormat="DD MMM YYYY" [(ngModel)]="Date" (ionChange)="onChangeDate($event.target.value)" placeholder="Select Date"></ion-datetime>
                     <ion-icon class="calendar-icon" name="calendar-outline" item-right></ion-icon>
@@ -35,102 +35,102 @@
     </ion-grid>
 
     <ion-grid class="container">
-        <ion-row class="box-des p-0">
+        <ion-row class="box-des ordersum p-0">
             <ion-col class="content_col" size="12">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">Accepted Orders</ion-label>
+                        <ion-label class="d-block">Accepted Orders : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">0</ion-label>
+                        <ion-label class="d-block">{{data.accepted_order_count==null?'0':data.accepted_order_count}}</ion-label>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">Total Accepted Order Amount(A)</ion-label>
+                        <ion-label class="d-block">Total Accepted Order Amount(A) : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">$0</ion-label>
+                        <ion-label class="d-block">£ {{data.TotalAcceptedOrderAmount==null?'0':data.TotalAcceptedOrderAmount}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
             <ion-col class="content_col" size="12">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">Cancelled Orders</ion-label>
+                        <ion-label class="d-block">Cancelled Orders : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">0</ion-label>
+                        <ion-label class="d-block">{{data.declined_order_count}}</ion-label>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">Total Cancelled Order Amount (B)</ion-label>
+                        <ion-label class="d-block">Total Cancelled Order Amount (B) : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">$0</ion-label>
-                    </ion-col>
-                </ion-row>
-            </ion-col>
-            <ion-col class="content_col" size="12">
-                <ion-row>
-                    <ion-col class="left_col">
-                        <ion-label class="d-block">Pending Orders</ion-label>
-                    </ion-col>
-                    <ion-col class="right_col">
-                        <ion-label class="d-block">0</ion-label>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="left_col">
-                        <ion-label class="d-block">Total Pending Order Amount (C)</ion-label>
-                    </ion-col>
-                    <ion-col class="right_col">
-                        <ion-label class="d-block">$0</ion-label>
+                        <ion-label class="d-block">£ {{data.TotalRejectedAmount}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
             <ion-col class="content_col" size="12">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">Paypal Amount (D)</ion-label>
+                        <ion-label class="d-block">Pending Orders : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">0</ion-label>
+                        <ion-label class="d-block">{{data.TotalPendingOrders}}</ion-label>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">CityPay Amount (E)</ion-label>
+                        <ion-label class="d-block">Total Pending Order Amount (C) : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">$0</ion-label>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col class="left_col">
-                        <ion-label class="d-block">Cash Amount (F)</ion-label>
-                    </ion-col>
-                    <ion-col class="right_col">
-                        <ion-label class="d-block">$0</ion-label>
+                        <ion-label class="d-block">£ {{data.TotalPendingAmount}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
             <ion-col class="content_col" size="12">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">Paypal refund Amount (G)</ion-label>
+                        <ion-label class="d-block">Paypal Amount (D) : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">0</ion-label>
+                        <ion-label class="d-block">£ {{data.paypal_total}} ( {{data.paypal_count}} )</ion-label>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">CityPay refund Amount (H)</ion-label>
+                        <ion-label class="d-block">CityPay Amount (E) : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">$0</ion-label>
+                        <ion-label class="d-block">£ {{data.citypay_total}} ( {{data.citypay_count}} )</ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block">Cash Amount (F) : </ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="d-block">£ {{data.cash_total}} ( {{data.cash_count}} )</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col class="content_col" size="12">
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block">Paypal refund Amount (G) : </ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="d-block">£ {{data.TotalPaypalRefundAmount}} ( {{data.PaypalRefundOrder}} )</ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="left_col">
+                        <ion-label class="d-block">CityPay refund Amount (H) : </ion-label>
+                    </ion-col>
+                    <ion-col class="right_col">
+                        <ion-label class="d-block">£ {{data.TotalCitypayRefundAmount}} ( {{data.CitypayRefundOrder}} )</ion-label>
                     </ion-col>
                 </ion-row>
 
@@ -138,18 +138,18 @@
             <ion-col class="content_col" size="12">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">Total Vouchers</ion-label>
+                        <ion-label class="d-block">Total Vouchers : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">0</ion-label>
+                        <ion-label class="d-block">{{data.TotalVouchers}}</ion-label>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">Voucher Amount (I)</ion-label>
+                        <ion-label class="d-block">Voucher Amount (I) : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">$0</ion-label>
+                        <ion-label class="d-block">£ {{data.TotalVoucherAmount}}</ion-label>
                     </ion-col>
                 </ion-row>
 
@@ -157,30 +157,30 @@
             <ion-col class="content_col" size="12">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">Total Refund (G + H)</ion-label>
+                        <ion-label class="d-block">Total Refund (G + H) : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">0</ion-label>
+                        <ion-label class="d-block">£ {{data.TotalPaypalRefundAmount + data.TotalCitypayRefundAmount}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
             <ion-col class="content_col" size="12">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">Total Sales (A + C)</ion-label>
+                        <ion-label class="d-block">Total Sales (A + C) : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">0</ion-label>
+                        <ion-label class="d-block">£ {{data.TotalAcceptedOrderAmount + data.TotalPendingAmount}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
             <ion-col class="content_col" size="12">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block">Total Business (A + C + I)</ion-label>
+                        <ion-label class="d-block">Total Business (A + C + I) : </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block">0</ion-label>
+                        <ion-label class="d-block">£ {{data.TotalAcceptedOrderAmount + data.TotalPendingAmount + data.TotalVoucherAmount}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>

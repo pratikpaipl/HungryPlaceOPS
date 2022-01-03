@@ -71,3 +71,23 @@
 .content_col:last-child {
     border-bottom: none
 }
+
+// ion-label {
+//     font-size: 13px !important;
+//     font-family: "Poppins";
+//     color: black;
+// }
+.ordersum ion-col.right_col {
+    text-align: right !important;
+    flex: 69px !important;
+    max-width: 69px !important;
+}
+
+.ordersum ion-col.left_col {
+    max-width: calc(100% - 70px);
+}
+
+.btn-red {
+    float: none;
+    margin-top: 15px;
+}
