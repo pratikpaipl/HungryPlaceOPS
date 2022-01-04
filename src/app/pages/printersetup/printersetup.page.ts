@@ -13,10 +13,7 @@ import { ActionSheetController, AlertController, ModalController } from '@ionic/
   styleUrls: ['printersetup.page.scss'],
 })
 export class PrinterSetupPage {
-  Date: any;
-  time = 0;
-  newDate: string;
-  myDate: String = new Date().toISOString();
+  PrinterList = [];
 
   constructor(public tools: Tools, private route: ActivatedRoute,
     public alertController: AlertController,
@@ -25,19 +22,11 @@ export class PrinterSetupPage {
     public formBuilder: FormBuilder, private eventService: EventService,
     private apiService: ApiService, private router: Router) {
 
-      this.myDate = new Date(this.time + (1000 * 60 * 60 * 24)).toISOString();
 
 
   }
-  ionViewDidEnter() {
-    //this.getAgentList();
-  }
- 
-  onChangeDate(date) {
-    console.log('Sel Date', date)
-    let selDate = this.Date.split('T')[0];
-    console.log('Selected Date split ', selDate.split('-'));
-    this.newDate = selDate.split('-')[2] + '.' + selDate.split('-')[1] + '.' + selDate.split('-')[0]
+  ngOnInit() { 
+    this.getPrinter();
   }
   
   clickaddprinter(){
@@ -59,4 +48,37 @@ export class PrinterSetupPage {
         }
       });
   }
+
+
+
+  getPrinter() {
+    if (this.tools.isNetwork()) {
+      this.tools.openLoader();
+      this.apiService.getPrinter().subscribe(data => {
+        this.tools.closeLoader();
+
+        let res: any = data;
+
+        if (res.code == 1) {
+          this.PrinterList = res.details;
+
+        }else{
+          this.tools.openAlert(res.msg);
+        }
+     
+     
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
+
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
+      });
+
+    } else {
+      this.tools.closeLoader();
+    }
+
+  }
+
 }

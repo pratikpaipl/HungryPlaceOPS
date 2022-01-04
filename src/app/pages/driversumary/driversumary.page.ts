@@ -16,6 +16,8 @@ export class DriverSumaryPage {
   time = 0;
   myDate: String = new Date().toISOString();
   data= "";
+  driverSummary = [];
+  sumA :any= 0;
 
   constructor(public tools: Tools, private route: ActivatedRoute,
     public alertController: AlertController,
@@ -30,8 +32,8 @@ export class DriverSumaryPage {
      this.Date = this.myDate.split('T')[0];
 
   }
-  ionViewDidEnter() {
-    //this.getAgentList();
+   ngOnInit() { 
+    this.getDriverSummary();
   }
 
   onChangeDate(date) {
@@ -44,14 +46,21 @@ export class DriverSumaryPage {
   getDriverSummary() {
     if (this.tools.isNetwork()) {
       this.tools.openLoader();
-      this.apiService.getOrderSummary(this.myDate).subscribe(data => {
+      this.apiService.getDriverSummary(this.myDate).subscribe(data => {
         this.tools.closeLoader();
 
         let res: any = data;
         console.log(' Response >>> ', res.details);
-        this.data=res.details;
-        console.log(' Response ::: ', this.data);
 
+        if (res.code == 1) {
+              this.driverSummary=res.details;
+              console.log(' Response ::: ', this.data);
+              for (const q of this.driverSummary) {
+                  this.sumA += Number(q.total_w_tax || 0);
+              }
+        }else{
+          this.tools.openAlert(res.msg);
+        }
 
       }, (error: Response) => {
         this.tools.closeLoader();

@@ -16,10 +16,13 @@ import { ChangeStatusModelComponent } from 'src/app/model/changestatus/changesta
   styleUrls: ['orderdetail.page.scss'],
 })
 export class OrderDetailPage {
-  Date: any;
-  time = 0;
-  newDate: string;
-  myDate: String = new Date().toISOString();
+
+  order_id='';
+  DetailData= "";
+  ClientInfo= "";
+  totalCount= "";
+
+  ItemList =[];
 
   constructor(public tools: Tools, private route: ActivatedRoute,
     public alertController: AlertController,
@@ -28,30 +31,27 @@ export class OrderDetailPage {
     public formBuilder: FormBuilder, private eventService: EventService,
     private apiService: ApiService, private router: Router) {
 
-      this.myDate = new Date(this.time + (1000 * 60 * 60 * 24)).toISOString();
-
+      this.route.params
+      .subscribe((params) => {
+        console.log('params =>', params.order_id);
+        this.order_id = params.order_id;
+      });
 
   }
-  ionViewDidEnter() {
-    //this.getAgentList();
+  ngOnInit() { 
+    this.getOrderDetails();
   }
 
-  onChangeDate(date) {
-    console.log('Sel Date', date)
-    let selDate = this.Date.split('T')[0];
-    console.log('Selected Date split ', selDate.split('-'));
-    this.newDate = selDate.split('-')[2] + '.' + selDate.split('-')[1] + '.' + selDate.split('-')[0]
-  }
+
+  //Button click
+ 
   refund(){
     this.router.navigateByUrl("orderrefund");
 
   }
-
-
   accept(){
     this.Accept();
   }
-
   decline(){
     this.Decline();
   }
@@ -79,7 +79,6 @@ export class OrderDetailPage {
         }
       });
   }
-
   async Decline() {
     const modal = await this.modalController.create({
       component: DeclineComponent,
@@ -96,7 +95,6 @@ export class OrderDetailPage {
         }
       });
   }
-
   async AssignDriver() {
     const modal = await this.modalController.create({
       component: AssignDriverModelComponent,
@@ -128,5 +126,45 @@ export class OrderDetailPage {
          // this.callApi(data.data) 
         }
       });
+  }
+
+
+
+
+
+  getOrderDetails() {
+    if (this.tools.isNetwork()) {
+      this.tools.openLoader();
+      this.apiService.getOrderDetails(this.order_id).subscribe(data => {
+        this.tools.closeLoader();
+
+        let res: any = data;
+        console.log('details >>> ', res);
+
+        if (res.code == 1) {
+          this.totalCount=res.details.total;
+          this.DetailData=res.details;
+          this.ClientInfo=res.details.client_info;
+          this.ItemList=res.details.item;
+
+          console.log('All Order Response >>> ', res);
+
+        }else{
+          this.tools.openAlert(res.msg);
+        }
+     
+     
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
+
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
+      });
+
+    } else {
+      this.tools.closeLoader();
+    }
+
   }
 }

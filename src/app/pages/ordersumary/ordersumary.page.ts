@@ -47,10 +47,14 @@ export class OrderSumaryPage {
         this.tools.closeLoader();
 
         let res: any = data;
-        console.log(' Response >>> ', res.details);
-        this.data=res.details;
-        console.log(' Response ::: ', this.data);
 
+        if (res.code == 1) {
+          console.log(' Response >>> ', res.details);
+          this.data=res.details;
+          console.log(' Response ::: ', this.data);
+        }else{
+          this.tools.openAlert(res.msg);
+        }
 
       }, (error: Response) => {
         this.tools.closeLoader();

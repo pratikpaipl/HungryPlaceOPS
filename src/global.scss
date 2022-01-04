@@ -896,12 +896,12 @@ img.back-btn {
 }
 
 .page_had ion-label.page_wtitle {
-	flex: 0 0 100%;
-	max-width: calc(100% - 25px);
-	font-size: 18px !important;
-	color: white;
-	text-align: center !important;
-	font-family: 'Poppins-SemiBold';
+    flex: 0 0 100%;
+    max-width: calc(100% - 25px);
+    font-size: 18px !important;
+    color: white;
+    text-align: center !important;
+    font-family: 'Poppins-SemiBold';
 }
 
 .box-des ion-label.content {
@@ -1180,8 +1180,8 @@ cimg {
 }
 
 .container.empty-list-box {
-	padding: 100px 0;
-	height: calc(100vh - 330px) !important;
+    padding: 100px 0;
+    height: calc(100vh - 330px) !important;
 }
 
 .form-group.contact_info {
@@ -1235,6 +1235,10 @@ cimg {
 
 .radcolor {
     color: red !important;
+}
+
+.bluecolor {
+    color: #489de2 !important;
 }
 
 .yallowcolor {
@@ -1345,19 +1349,19 @@ ion-row.box-des.date_box {
 }
 
 ion-row.box-des.date_box ion-item {
-	--padding-start: 0;
-	--padding-end: 0;
-	--inner-padding-end: 0px;
-	--padding-top: 0px !important;
-	--inner-border-width: 0px !important;
-	border: none !important;
-	--border-width: 0px !important;
+    --padding-start: 0;
+    --padding-end: 0;
+    --inner-padding-end: 0px;
+    --padding-top: 0px !important;
+    --inner-border-width: 0px !important;
+    border: none !important;
+    --border-width: 0px !important;
 }
 
 ion-datetime {
-	--padding-bottom: 0;
-	--padding-start: 0px;
-	--padding-top: 0px;
+    --padding-bottom: 0;
+    --padding-start: 0px;
+    --padding-top: 0px;
 }
 
 .graytxt {
@@ -1366,15 +1370,14 @@ ion-datetime {
     color: #9e9e9e !important;
 }
 
-
 ion-radio {
-    --color-checked:#FF0606 !important;
+    --color-checked: #FF0606 !important;
 }
 
 [aria-checked="true"].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md {
-	border-color: #FF0606 !important;
+    border-color: #FF0606 !important;
 }
 
 .alert-radio-inner.sc-ion-alert-md {
-	background-color: #FF0606 !important;
+    background-color: #FF0606 !important;
 }

@@ -19,6 +19,10 @@ export class OrderHistoryPage {
   AgentName = "";
   itemsAll = [];
 
+  //For  Order
+  OrderList = [];
+  ALLOrderList = [];
+
   constructor(public tools: Tools, private route: ActivatedRoute,
     public alertController: AlertController,
     public modalController: ModalController,
@@ -28,12 +32,17 @@ export class OrderHistoryPage {
     {
 
   }
-  ionViewDidEnter() {
-    //this.getAgentList();
+
+  ngOnInit() { 
+    this.getOrderData('','','');
   }
+
+
+
   clickfilter(){
     this.filter();
   }
+
   async filter() {
     const modal = await this.modalController.create({
       component: FilterModelComponent,
@@ -55,8 +64,8 @@ export class OrderHistoryPage {
   addAgent() {
     this.router.navigateByUrl("addagent");
   }
-  gotoDetils() {
-    this.router.navigateByUrl("orderdetail");
+  gotoDetils(order_id) {
+    this.router.navigateByUrl("orderdetail/"+order_id);
   }
   agentEdit(agent) {
     this.router.navigateByUrl('editagent/' + agent.id + '/' + agent.first_name + '/' + agent.last_name + '/' + agent.email + '/' + agent.phone);
@@ -118,30 +127,7 @@ export class OrderHistoryPage {
     return await alert.present();
   }
 
-  // getAgentList() {
-  //   if (this.tools.isNetwork()) {
-  //     this.tools.openLoader();
-  //     this.apiService.AgentList().subscribe(data => {
-  //       this.tools.closeLoader();
-
-  //       let res: any = data;
-  //       console.log(' agent > ', res);
-  //       this.AgentList = res.data.Agent;
-  //       this.itemsAll = res.data.Agent;
-
-  //     }, (error: Response) => {
-  //       this.tools.closeLoader();
-  //       console.log(error);
-
-  //       let err: any = error;
-  //       this.tools.openAlertToken(err.status, err.error.message);
-  //     });
-
-  //   } else {
-  //     this.tools.closeLoader();
-  //   }
-
-  // }
+ 
 
   // For Filter
   async ionChange(){
@@ -157,4 +143,40 @@ export class OrderHistoryPage {
       }
     });
   }
+
+
+
+  getOrderData(txt_status,txt_order_type,txt_search) {
+    if (this.tools.isNetwork()) {
+      this.tools.openLoader();
+      this.apiService.getAllOrder(txt_status,txt_order_type,txt_search).subscribe(data => {
+        this.tools.closeLoader();
+
+        let res: any = data;
+        console.log('All Order Response >>> ', res);
+
+        if (res.code == 1) {
+          this.OrderList = res.details;
+          this.ALLOrderList = res.details;
+          console.log('All Order Response >>> ', this.OrderList.length);
+
+        }else{
+          this.tools.openAlert(res.msg);
+        }
+     
+     
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
+
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
+      });
+
+    } else {
+      this.tools.closeLoader();
+    }
+
+  }
+
 }

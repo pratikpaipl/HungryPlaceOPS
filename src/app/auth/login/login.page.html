@@ -1,7 +1,7 @@
 <ion-content>
     <div class="main-content" style="background-color: #FF0606 !important;">
         <ion-img class="img-logo" src="../../../assets/images/logo.png"></ion-img>
-        <form [formGroup]="loginForm" (ngSubmit)="login()" style="padding: 0 0px;">
+        <form [formGroup]="loginForm" style="padding: 0 0px;">
             <ion-grid class="info-view" style="border-radius: 20px 20px 0 0 !important;">
                 <ion-row>
                     <ion-col>
@@ -48,7 +48,7 @@
 
                         <ion-row class="mt-10">
                             <ion-col>
-                                <ion-button class="btn-red" type="submit">Login <i class="fas fa-arrow-right"></i></ion-button>
+                                <ion-button class="btn-red" (click)="login()">Login <i class="fas fa-arrow-right"></i></ion-button>
 
                             </ion-col>
                         </ion-row>

@@ -56,11 +56,18 @@ export class LoginPage {
           this.tools.closeLoader();
           let res: any = response;
           console.log("res >>",res);
-          this.loginForm.reset();
-          localStorage.setItem('login_token', res.details.login_token);
-          console.log("login_token >>>",res.details.login_token);
-          this.apiService.setUserData(res.details.info, res.details.login_token);
-          this.router.navigateByUrl('/home', { replaceUrl: true }); 
+
+          if (res.code == 1) {
+            this.loginForm.reset();
+            localStorage.setItem('login_token', res.details.login_token);
+            console.log("login_token >>>",res.details.login_token);
+            this.apiService.setUserData(res.details.info, res.details.login_token);
+            this.router.navigateByUrl('/home', { replaceUrl: true }); 
+          }else{
+            this.tools.openAlert(res.msg);
+          }
+
+          
         }, (error: Response) => {
           let err: any = error;        
           console.log('Api Error ', err);

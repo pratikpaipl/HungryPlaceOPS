@@ -13,11 +13,15 @@ import { AddPrefrencesComponent } from 'src/app/model/add-prefrences/add-prefren
   styleUrls: ['allclient.page.scss'],
 })
 export class AllClientPage {
-  AgentList = [];
   Agentid = '';
+  AgentList = [];
 
   AgentName = "";
-  itemsAll = [];
+
+
+  //For  Order
+  ClientList = [];
+  ALLClientList = [];
 
   constructor(public tools: Tools, private route: ActivatedRoute,
     public alertController: AlertController,
@@ -27,9 +31,11 @@ export class AllClientPage {
     private apiService: ApiService, private router: Router) {
 
   }
-  ionViewDidEnter() {
-    //this.getAgentList();
+  
+  ngOnInit() {
+    this.getClientList();
   }
+
   addprefrences(){
     this.addPrefrences();
   }
@@ -50,15 +56,6 @@ export class AllClientPage {
       });
   }
 
-  
-
-
-  addAgent() {
-    this.router.navigateByUrl("addagent");
-  }
-  agentEdit(agent) {
-    this.router.navigateByUrl('editagent/' + agent.id + '/' + agent.first_name + '/' + agent.last_name + '/' + agent.email + '/' + agent.phone);
-  }
 
   agentDelete(Agentid) {
     this.Agentid = Agentid;
@@ -141,17 +138,52 @@ export class AllClientPage {
   // }
 
   // For Filter
-  async ionChange(){
-    this.AgentList = await this.itemsAll;
-    const searchTerm =this.AgentName;  
-    if (!searchTerm) {
-      return;
-    }
+  // async ionChange(){
+  //   this.AgentList = await this.itemsAll;
+  //   const searchTerm =this.AgentName;  
+  //   if (!searchTerm) {
+  //     return;
+  //   }
   
-    this.AgentList = this.AgentList.filter(currentDraw => {
-      if (currentDraw.agentname && searchTerm) {
-        return ((currentDraw.agentname.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (currentDraw.email.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)|| (currentDraw.phone.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
-      }
-    });
+  //   this.AgentList = this.AgentList.filter(currentDraw => {
+  //     if (currentDraw.agentname && searchTerm) {
+  //       return ((currentDraw.agentname.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (currentDraw.email.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)|| (currentDraw.phone.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
+  //     }
+  //   });
+  // }
+
+
+
+  getClientList() {
+    if (this.tools.isNetwork()) {
+      this.tools.openLoader();
+      this.apiService.getAllClient().subscribe(data => {
+        this.tools.closeLoader();
+
+        let res: any = data;
+        console.log('All Order Response >>> ', res);
+
+        if (res.code == 1) {
+          this.ClientList = res.details;
+          this.ALLClientList = res.details;
+
+        }else{
+          this.tools.openAlert(res.msg);
+        }
+     
+     
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
+
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
+      });
+
+    } else {
+      this.tools.closeLoader();
+    }
+
   }
+
 }

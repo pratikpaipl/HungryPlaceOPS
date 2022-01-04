@@ -158,10 +158,47 @@ export class ApiService {
   }
   getDriverSummary(date): any {
     let postData = new FormData();
-    postData.append("date", date);
+    postData.append("delivery_date", date);
 
     return this.http.post(environment.BaseUrl + 'DriversCollectionList', postData, this.httpOptions);
   }
+  getAllOrder(txt_status,txt_order_type,txt_search): any {
+    let postData = new FormData();
+    postData.append("txt_status", txt_status);
+    postData.append("txt_order_type", txt_order_type);
+    postData.append("txt_search", txt_search);
+
+    return this.http.post(environment.BaseUrl + 'GetAllOrders', postData, this.httpOptions);
+  }
+  getAllClient(): any {
+    let postData = new FormData();
+    // postData.append("txt_status", txt_status);
+
+    return this.http.post(environment.BaseUrl + 'all_clients_list', postData, this.httpOptions);
+  }
+  getOrderDetails(order_id): any {
+    let postData = new FormData();
+     postData.append("order_id", order_id);
+
+    return this.http.post(environment.BaseUrl + 'OrderdDetails', postData, this.httpOptions);
+  }
+  getPrinter(): any {
+    let postData = new FormData();
+
+    return this.http.post(environment.BaseUrl + 'getprinterdetails', postData, this.httpOptions);
+  }
+  SaveProfile(Data): any {
+    return this.http.post(environment.BaseUrl + 'saveProfile', Data, this.httpOptions);
+  }
+
+
+
+
+
+
+
+
+
 
 
 

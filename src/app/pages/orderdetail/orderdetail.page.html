@@ -8,7 +8,7 @@
                             <ion-buttons (click)="tools.backPage()" no-padding>
                                 <ion-img class="img" src="../../../assets/images/Backwhite.png"></ion-img>
                             </ion-buttons>
-                            <ion-label class="page_wtitle">Order No : 0000</ion-label>
+                            <ion-label class="page_wtitle">Order No : {{order_id}}</ion-label>
                         </div>
                     </ion-col>
                     <ion-col size="1">
@@ -25,30 +25,40 @@
 <ion-content style="background: #fff">
     <ion-grid class="container" style="margin-top: 10px !important;">
         <ion-row class="box-des p-0">
+
             <ion-col class="content_col" size="12" style="background: #f6f6f6;padding: 13px 10px;">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block f-11">Order No : 0000</ion-label>
+                        <ion-label class="d-block f-11">Order No : {{order_id}} </ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block f-11" style="color: orange;">Pending</ion-label>
+                        <!-- <ion-label class="d-block f-11" style="color: orange;">{{DetailData.status}}</ion-label> -->
+                        <ion-label class="d-block f-11" [ngClass]="{
+                        'orangecolor': DetailData.status === 'Pending',
+                        'greencolor' : DetailData.status === 'Delivered',
+                        'orangecolor' : DetailData.status === 'Refunded Fully',
+                        'orangecolor' : DetailData.status === 'Refunded Partially',
+                        'greencolor' : DetailData.status === 'Accepted',
+                        'bluecolor' : DetailData.status === 'Assigned',
+                        'radcolor' : DetailData.status === 'Cancelled'}">
+                            {{DetailData.status}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
             <ion-col class="content_col" size="12">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block f-11">Test</ion-label>
+                        <ion-label class="d-block f-11">{{ClientInfo.full_name}}</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block f-11">+44 00000000</ion-label>
+                        <ion-label class="d-block f-11">{{ClientInfo.contact_phone}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
             <ion-col class="content_col" size="12">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="graytxt f-11">Location here</ion-label>
+                        <ion-label class="graytxt f-11">{{ClientInfo.address}}</ion-label>
                     </ion-col>
 
                 </ion-row>
@@ -64,7 +74,7 @@
                         <ion-label class="d-block f-11">Order Type</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="graytxt f-11">Delivery</ion-label>
+                        <ion-label class="graytxt f-11">{{DetailData.trans_type}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -74,7 +84,7 @@
                         <ion-label class="d-block f-11">Payment Type</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="graytxt f-11">COD</ion-label>
+                        <ion-label class="graytxt f-11">{{DetailData.payment_type}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -84,7 +94,7 @@
                         <ion-label class="d-block f-11">Ordered Time</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="graytxt f-11">00:00 AM</ion-label>
+                        <ion-label class="graytxt f-11">{{DetailData.ordered_time}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -94,7 +104,7 @@
                         <ion-label class="d-block f-11">Delivery Date</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="graytxt f-11">00 Jan 0000</ion-label>
+                        <ion-label class="graytxt f-11">{{DetailData.delivery_date}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -104,7 +114,7 @@
                         <ion-label class="d-block f-11">Despatch Time</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="graytxt f-11">00:00 PM</ion-label>
+                        <ion-label class="graytxt f-11">{{DetailData.delivery_time}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -114,7 +124,7 @@
                         <ion-label class="d-block f-11">Delivery Instruction</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="graytxt f-11">test@test.com</ion-label>
+                        <ion-label class="graytxt f-11">{{DetailData.delivery_instruction}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -130,26 +140,18 @@
                 </ion-row>
             </ion-col>
 
-            <ion-col class="content_col" size="12">
+
+            <ion-col class="content_col" size="12" *ngFor="let item of ItemList;">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block f-11">0x0 Kulfi</ion-label>
+                        <ion-label class="d-block f-11">{{item.qty}} X {{item.discounted_price}} - {{item.item_name}}</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block f-11">$ 00</ion-label>
+                        <ion-label class="d-block f-11">{{item.total_price}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
-            <ion-col class="content_col" size="12">
-                <ion-row>
-                    <ion-col class="left_col">
-                        <ion-label class="d-block f-11">0x0 Raita (BOGO)</ion-label>
-                    </ion-col>
-                    <ion-col class="right_col">
-                        <ion-label class="d-block f-11">Free</ion-label>
-                    </ion-col>
-                </ion-row>
-            </ion-col>
+
 
             <ion-col class="content_col" size="12">
                 <ion-row>
@@ -157,7 +159,7 @@
                         <ion-label class="d-block title f-15">Sub Total</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block title f-15">$ 0000</ion-label>
+                        <ion-label class="d-block title f-15">{{totalCount.subtotal}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -168,7 +170,7 @@
                         <ion-label class="d-block f-11">Discount - 3.5 %</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="graytxt f-11">(00)</ion-label>
+                        <ion-label class="graytxt f-11">({{totalCount.discounted_amount}})</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -178,7 +180,7 @@
                         <ion-label class="d-block f-11">Delivery Fee</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="graytxt f-11">$ 000</ion-label>
+                        <ion-label class="graytxt f-11">£ {{totalCount.delivery_charges}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -191,12 +193,14 @@
                         <ion-label class="d-block title f-15">Total</ion-label>
                     </ion-col>
                     <ion-col class="right_col">
-                        <ion-label class="d-block title f-15">$ 000</ion-label>
+                        <ion-label class="d-block title f-15">{{totalCount.total}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
         </ion-row>
-        <ion-row class="button_box">
+
+
+        <ion-row class="button_box" *ngIf="DetailData.status === 'Pending'">
             <ion-col>
                 <ion-button class="btn-red" (click)="decline()">DECLINE</ion-button>
             </ion-col>
@@ -204,7 +208,8 @@
                 <ion-button class="btn-green" (click)="accept()">ACCEPT</ion-button>
             </ion-col>
         </ion-row>
-        <ion-row class="button_box">
+
+        <ion-row class="button_box" *ngIf="DetailData.status != 'Pending'">
             <ion-col>
                 <ion-button class="btn-green" (click)="chngstatus()">CHANGE STATUS</ion-button>
             </ion-col>
@@ -213,12 +218,18 @@
             </ion-col>
         </ion-row>
         <ion-row class="button_box">
-            <ion-col>
+            <ion-col *ngIf="DetailData.status === 'Accepted' || 'Refunded Partially'">
                 <ion-button class="btn-blue" (click)="assignDriver()">ASSIGN DRIVER</ion-button>
             </ion-col>
-            <ion-col>
+            <ion-col *ngIf="DetailData.payment_type != 'CASH'">
                 <ion-button class="btn-orange" (click)="refund()">REFUND</ion-button>
             </ion-col>
+        </ion-row>
+        <ion-row class="button_box">
+            <ion-col *ngIf="DetailData.status === 'Assigned'">
+                <ion-button class="btn-blue" (click)="changeDriver()">CHANGE DRIVER</ion-button>
+            </ion-col>
+
         </ion-row>
     </ion-grid>
 </ion-content>

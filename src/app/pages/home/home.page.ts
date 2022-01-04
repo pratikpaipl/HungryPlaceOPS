@@ -39,10 +39,10 @@ export class HomePage {
   //    }
 
   //Api Calling
-  ionViewDidEnter() {
+  
+  ngOnInit() { 
     this.getTodayOrderData();
   }
-
 
   // Button Click Event
 
