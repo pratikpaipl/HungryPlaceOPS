@@ -132,7 +132,7 @@
             </ion-row>
         </ion-grid>
 
-        <ion-grid class="container" style="margin-bottom: 50px; border-radius: 20px 20px 0 0 !important; background: white !important;">
+        <ion-grid class="container" style="padding-bottom: 30px; border-radius: 20px 20px 0 0 !important; background: white !important;">
             <ion-row class="p-0">
                 <ion-col class="p-0" size='12'>
                     <ion-row class="button_box" style="margin-top: 10px;">
@@ -144,7 +144,7 @@
                         </ion-col>
                     </ion-row>
 
-                    <ion-row class="p-0">
+                    <ion-row class="p-0" *ngIf="TodayOrderList?.length != 0">
                         <ion-col class="p-0">
                             <div class="search_box">
                                 <ion-img class="search_icon" src="../../../assets/images/search.png"></ion-img>
@@ -153,7 +153,7 @@
                         </ion-col>
                     </ion-row>
 
-                    <ion-row class="p-0">
+                    <ion-row class="p-0" *ngIf="TodayOrderList?.length != 0">
                         <ion-col class="p-0">
                             <ion-label class="d-block mt-10">Today's Orders</ion-label>
                         </ion-col>
@@ -213,7 +213,7 @@
         <ion-grid class="container empty-list-box" *ngIf="TodayOrderList?.length == 0">
             <ion-row class="p-0">
                 <ion-col size="12" class="p-0">
-                    <ion-label class="empty-list">No Current Orders</ion-label>
+                    <ion-label class="empty-list">No Today's Orders</ion-label>
                 </ion-col>
             </ion-row>
         </ion-grid>

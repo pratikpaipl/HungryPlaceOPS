@@ -135,8 +135,16 @@ export class ApiService {
   }
 
   GetIpaddressDefaulttime(): any {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'api-key': environment.apikey,
+        'login_token': this.getLoginToken(),
+
+      })
+    }
     let postData = new FormData();
-    return this.http.post(environment.BaseUrl + 'getIpaddressDefaulttime', postData, this.httpOptions);
+    return this.http.post(environment.BaseUrl + 'getIpaddressDefaulttime', postData, httpOptions);
   }
   UpdateMerchantTimings(DTime): any {
     let postData = new FormData();
@@ -184,16 +192,41 @@ export class ApiService {
   }
   getPrinter(): any {
     let postData = new FormData();
-
     return this.http.post(environment.BaseUrl + 'getprinterdetails', postData, this.httpOptions);
   }
   SaveProfile(Data): any {
     return this.http.post(environment.BaseUrl + 'saveProfile', Data, this.httpOptions);
   }
+  deletePrinter(Data): any {
+    return this.http.post(environment.BaseUrl + 'deleteprinter', Data, this.httpOptions);
+  }
+  addPrinter(Data): any {
+    return this.http.post(environment.BaseUrl + 'add_new_printer', Data, this.httpOptions);
+  }
+  PrinterChangesSave(Data): any {
+    return this.http.post(environment.BaseUrl + 'updateprinterdetails', Data, this.httpOptions);
+  }
+  getPrinterOption(): any {
+    let postData = new FormData();
+    postData.append("mtid","1")
+    return this.http.post(environment.BaseUrl + 'getAvailablePrinters', postData, this.httpOptions);
+  }
+  updatePrinterOption(Data): any {
+    return this.http.post(environment.BaseUrl + 'updateprinteroptions', Data, this.httpOptions);
+  }
 
-
-
-
+  CheckPrinterIsConnected(IP): any {
+    return this.http.post('https://'+IP+'/cgi-bin/epos/service.cgi?devid=local_printer', "", this.httpOptions);
+  }
+  getPreferences(Data): any {
+    return this.http.post(environment.BaseUrl + 'get_preference', Data, this.httpOptions);
+  }
+  AddPreferences(Data): any {
+    return this.http.post(environment.BaseUrl + 'AddPreference', Data, this.httpOptions);
+  }
+  RemovePreferences(Data): any {
+    return this.http.post(environment.BaseUrl + 'remove_preference', Data, this.httpOptions);
+  }
 
 
 

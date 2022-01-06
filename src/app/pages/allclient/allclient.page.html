@@ -28,7 +28,7 @@
             <ion-col class="p-0" size='12'>
                 <div class="search_box">
                     <ion-img class="search_icon" src="../../../assets/images/search.png"></ion-img>
-                    <ion-input type="search" placeholder="Search" [(ngModel)]="AgentName" (ionChange)="ionChange()"></ion-input>
+                    <ion-input type="search" placeholder="Search" [(ngModel)]="client" (ionChange)="ionChange()"></ion-input>
                 </div>
             </ion-col>
         </ion-row>
@@ -71,18 +71,16 @@
                     </ion-col>
                     <ion-col class="right_col">
                         <div class="action_buttion">
-                            <ion-img class="ac_img" src="../../../assets/images/greenplus.png" (click)="addprefrences()"></ion-img>
-                            <ion-img class="ac_img" src="../../../assets/images/deletetwo.png" (click)="deleteprefrences()"></ion-img>
+                            <ion-img class="ac_img" src="../../../assets/images/greenplus.png" (click)="addprefrences(client.client_id)"></ion-img>
+                            <ion-img class="ac_img" src="../../../assets/images/deletetwo.png" (click)="deleteprefrences(client.client_id)"></ion-img>
                         </div>
                     </ion-col>
                 </ion-row>
             </ion-col>
         </ion-row>
-        <ion-button class="btn-red">Print Summary</ion-button>
+        <!-- <ion-button class="btn-red">Print Summary</ion-button> -->
 
     </ion-grid>
-
-
 
     <ion-grid class="container empty-list-box" *ngIf="ClientList?.length == 0">
         <ion-row class="p-0">

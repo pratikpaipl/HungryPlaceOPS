@@ -23,22 +23,21 @@
 </ion-header>
 
 <ion-content style="background: #fff">
-    <ion-grid class="container" style="margin-top: 10px;">
-        <ion-row style="padding: 0;">
-            <ion-col style="padding: 0;" size='12'>
+
+    <ion-grid class="container search_compo">
+        <ion-row class="p-0">
+            <ion-col class="p-0" size='12'>
                 <div class="search_box">
                     <ion-img class="search_icon" src="../../../assets/images/search.png"></ion-img>
-                    <ion-input type="search" placeholder="Search" [(ngModel)]="AgentName" (ionChange)="ionChange()"></ion-input>
+                    <ion-input type="search" placeholder="Search" [(ngModel)]="CustomerName" (ionChange)="ionChange()"></ion-input>
                     <ion-img style="width: 40px;" src="../../../assets/images/filter.png" item-right (click)="clickfilter()"></ion-img>
 
                 </div>
-                <!-- <ion-icon class="calendar-icon" name="filter-outline" item-right></ion-icon> -->
-
             </ion-col>
         </ion-row>
     </ion-grid>
 
-    <ion-grid class="container" style="margin-top: 10px;">
+    <ion-grid class="container" style="margin-top: 70px;">
         <ion-row class="box-des p-0" *ngFor="let order of OrderList;" (click)="gotoDetils(order.order_id)">
             <ion-col>
                 <ion-img style="position: absolute; top: 0px; left: 0px; width: 40px; z-index: 1;" src="../../../assets/images/new.png" *ngIf="order.viewed=='1'"></ion-img>
@@ -71,11 +70,8 @@
                     </ion-col>
                     <ion-col>
                         <ion-button [ngClass]="{
-                                     'btn-green': order.status === 'Pending',
-                                     'btn-green' : order.status === 'Delivered',
-                                     'btn-orange' : order.status === 'Refunded Fully',
-                                     'btn-orange' : order.status === 'Refunded Partially',
-                                     'btn-green' : order.status === 'Accepted',
+                                     'btn-orange' : order.status === 'Refunded Fully' || order.status === 'Refunded Partially' || order.status === 'Pending',
+                                     'btn-green' : order.status === 'Accepted' || order.status === 'Delivered',
                                      'btn-blue' : order.status === 'Assigned',
                                      'btn-redd' : order.status === 'Cancelled'}">
                             {{order.status}}</ion-button>

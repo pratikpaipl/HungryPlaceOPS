@@ -34,15 +34,14 @@ export class HomePage {
     //   console.log('Event call')
     // });
   }
-  // ionViewWillEnter() {
-  //   this.user = this.apiService.getUserData();
-  //    }
 
   //Api Calling
-  
-  ngOnInit() { 
+  ionViewWillEnter() {
     this.getTodayOrderData();
   }
+  // ngOnInit() { 
+  //   this.getTodayOrderData();
+  // }
 
   // Button Click Event
 

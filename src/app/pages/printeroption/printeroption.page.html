@@ -24,14 +24,22 @@
 
 <ion-content style="background: #fff">
     <ion-grid class="container">
-        <ion-row class="p-0"> 
+        <ion-row class="p-0">
             <ion-col size="12" class="p-0">
                 <ion-list class="chklist">
                     <ion-item>
-                      <ion-label>Resturant Copy</ion-label>
-                      <ion-checkbox slot="end" [(ngModel)]="terms" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+                        <ion-label>Restaurant Copy</ion-label>
+                        <ion-checkbox slot="end" [(ngModel)]="ResCopy" (click)="UpdatePrinter(ResCopy,'restaurant_copy')"></ion-checkbox>
                     </ion-item>
-                  </ion-list>
+                    <ion-item>
+                        <ion-label>Customer Copy</ion-label>
+                        <ion-checkbox slot="end" [(ngModel)]="CusCopy" (click)="UpdatePrinter(CusCopy,'customer_copy')"></ion-checkbox>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Kitchen Copy</ion-label>
+                        <ion-checkbox slot="end" [(ngModel)]="KitCopy" (click)="UpdatePrinter(KitCopy,'kitchen_copy')"></ion-checkbox>
+                    </ion-item>
+                </ion-list>
             </ion-col>
         </ion-row>
     </ion-grid>

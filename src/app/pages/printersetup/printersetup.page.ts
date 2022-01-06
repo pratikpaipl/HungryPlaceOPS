@@ -14,6 +14,7 @@ import { ActionSheetController, AlertController, ModalController } from '@ionic/
 })
 export class PrinterSetupPage {
   PrinterList = [];
+  PrinterId='';
 
   constructor(public tools: Tools, private route: ActivatedRoute,
     public alertController: AlertController,
@@ -25,9 +26,15 @@ export class PrinterSetupPage {
 
 
   }
-  ngOnInit() { 
+  
+  ionViewWillEnter() {
     this.getPrinter();
   }
+
+  // ngOnInit() { 
+  //   this.getPrinter();
+  // }
+
   
   clickaddprinter(){
     this.addprinter();
@@ -42,14 +49,15 @@ export class PrinterSetupPage {
     await modal.present();
     await modal.onDidDismiss()
       .then((data) => {
-        console.log('Selected Cart Items from Dilogs ',data.data);
-        if (data.data) {
-         // this.callApi(data.data) 
-        }
+        console.log('Selected Cart Items from Dilogs ',data);
+         this.getPrinter();
       });
   }
 
-
+  savechanges(){
+    console.log('data >> ',JSON.stringify(this.PrinterList))
+    this.SaveChanges();
+  }
 
   getPrinter() {
     if (this.tools.isNetwork()) {
@@ -62,11 +70,14 @@ export class PrinterSetupPage {
         if (res.code == 1) {
           this.PrinterList = res.details;
 
+          for (let index = 0; index < this.PrinterList.length; index++) {
+            const element = this.PrinterList[index];
+            console.log("IP >>",element.printer_ip)
+           // this.checkPrinter(element.printer_ip); 
+          }
         }else{
           this.tools.openAlert(res.msg);
         }
-     
-     
       }, (error: Response) => {
         this.tools.closeLoader();
         console.log(error);
@@ -81,4 +92,115 @@ export class PrinterSetupPage {
 
   }
 
+  deletePrinter(PrinterId){
+    this.PrinterId=PrinterId;
+    this.deleteAlert(
+      "Are you sure you want to Delete?",
+      "Delete",
+      "Cancel"
+    );
+  }
+
+  async deleteAlert(message, btnYes, btnNo) {
+    const alert = await this.alertController.create({
+      message: message,
+      buttons: [
+        {
+          text: btnNo ? btnNo : 'Cancel',
+          role: 'cancel',
+          handler: () => {
+
+          }
+        },
+        {
+          text: btnYes ? btnYes : 'Yes',
+          handler: () => {
+            this.deletePart();
+          }
+        }
+      ], backdropDismiss: true
+    });
+    return await alert.present();
+  }
+
+  deletePart() {
+    if (this.tools.isNetwork()) {
+      let postData = new FormData();
+
+      postData.append('id', this.PrinterId);
+
+      this.tools.openLoader();
+      this.apiService.deletePrinter(postData).subscribe(data => {
+        this.tools.closeLoader();
+
+        let res: any = data;
+        this.getPrinter();
+
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
+
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
+      });
+
+    } else {
+      this.tools.closeLoader();
+    }
+
+  }
+
+  SaveChanges() {
+    if (this.tools.isNetwork()) {
+      let postData = new FormData();
+
+      postData.append('printer_data', JSON.stringify(this.PrinterList));
+
+      this.tools.openLoader();
+      this.apiService.PrinterChangesSave(postData).subscribe(data => {
+        this.tools.closeLoader();
+
+        let res: any = data;
+        this.getPrinter();
+
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
+
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
+      });
+
+    } else {
+      this.tools.closeLoader();
+    }
+
+  }
+
+  checkPrinter(IP) {
+    if (this.tools.isNetwork()) {
+      this.tools.openLoader();
+      this.apiService.CheckPrinterIsConnected(IP).subscribe(data => {
+        this.tools.closeLoader();
+
+        let res: any = data;
+
+        if (res.code == 1) {
+          
+        }else{
+          this.tools.openAlert(res.msg);
+        }
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
+
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
+      });
+
+    } else {
+      this.tools.closeLoader();
+    }
+
+  }
 }

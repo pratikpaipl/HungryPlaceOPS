@@ -25,11 +25,11 @@
 <ion-content style="background: #fff">
     <ion-grid class="container" style="margin-top: 10px !important;">
 
-        <ion-row class="box-des p-0" style="margin-top: 15px;">
+        <ion-row class="box-des p-0" style="margin-top: 15px;" *ngFor="let printer of PrinterList ;let i = index">
             <ion-col class="content_col" size="12" style="background: #f6f6f6;">
                 <ion-row>
                     <ion-col class="left_col">
-                        <ion-label class="d-block f-20">Primary Printer</ion-label>
+                        <ion-label class="d-block f-20">{{printer.printername}}</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -40,7 +40,8 @@
                         <ion-label class="d-block f-13">Printer IP</ion-label>
                     </ion-col>
                     <ion-col class="right_col" size="6">
-                        <ion-input type="text" placeholder="Enter IP Address"></ion-input>
+                        <!-- [(ngModel)]="AgentName" (ionChange)="ionChange()" -->
+                        <ion-input type="text" placeholder="Enter IP Address" [(ngModel)]="printer.printer_ip"></ion-input>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -49,7 +50,7 @@
                     <ion-col class="left_col" size="10">
                         <ion-label class="d-block f-13" style="color: red !important;">Not Connected</ion-label>
                     </ion-col>
-                    <ion-col class="right_col deletes" size="2">
+                    <ion-col class="right_col deletes" size="2" (click)="deletePrinter(printer.printer_id)" *ngIf="printer.printername !== 'Primary Printer' && printer.printername !=='Kitchen Printer'">
                         <i class="fas fa-trash-alt"></i>
                     </ion-col>
                 </ion-row>

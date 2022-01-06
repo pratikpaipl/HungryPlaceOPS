@@ -13,7 +13,7 @@
                     <ion-col>
                         <ion-item class="form-control">
                             <ion-label position="floating">Enter Printer Name</ion-label>
-                            <ion-input type="text" style="text-transform: none !important;" [(ngModel)]="speinst"></ion-input>
+                            <ion-input type="text" style="text-transform: none !important;" [(ngModel)]="PName"></ion-input>
                         </ion-item>
                     </ion-col>
                 </ion-row>
@@ -21,13 +21,13 @@
                     <ion-col>
                         <ion-item class="form-control">
                             <ion-label position="floating">Enter Printer IP</ion-label>
-                            <ion-input type="text" style="text-transform: none !important;" [(ngModel)]="speinst"></ion-input>
+                            <ion-input type="text" style="text-transform: none !important;" [(ngModel)]="PId"></ion-input>
                         </ion-item>
                     </ion-col>
                 </ion-row>
 
                 <ion-row class="mt-20">
-                    <ion-button class="btn-red" type="submit">Submit</ion-button>
+                    <ion-button class="btn-red" (click)="save()">Submit</ion-button>
                 </ion-row>
             </ion-col>
         </ion-row>

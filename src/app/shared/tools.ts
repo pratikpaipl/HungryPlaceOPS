@@ -224,6 +224,7 @@ export class Tools {
                     text: btnYes ? btnYes : 'Yes',
                     handler: () => {
                         localStorage.clear();
+                    
                         localStorage.removeItem('kushal_cart_data');
                         localStorage.removeItem('user_id');
                         localStorage.removeItem('login_token');

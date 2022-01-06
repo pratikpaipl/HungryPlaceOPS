@@ -13,15 +13,12 @@ import { AddPrefrencesComponent } from 'src/app/model/add-prefrences/add-prefren
   styleUrls: ['allclient.page.scss'],
 })
 export class AllClientPage {
-  Agentid = '';
-  AgentList = [];
-
-  AgentName = "";
-
+  uid = '';
 
   //For  Order
   ClientList = [];
   ALLClientList = [];
+  client = "";
 
   constructor(public tools: Tools, private route: ActivatedRoute,
     public alertController: AlertController,
@@ -32,63 +29,20 @@ export class AllClientPage {
 
   }
   
-  ngOnInit() {
+  
+  ionViewWillEnter() {
     this.getClientList();
   }
 
-  addprefrences(){
-    this.addPrefrences();
-  }
-  async addPrefrences() {
-    const modal = await this.modalController.create({
-      component: AddPrefrencesComponent,
-      cssClass: 'change-preference-modal',
-      componentProps: { value: 0 },
-    
-    });
-    await modal.present();
-    await modal.onDidDismiss()
-      .then((data) => {
-        console.log('Selected Cart Items from Dilogs ',data.data);
-        if (data.data) {
-         // this.callApi(data.data) 
-        }
-      });
-  }
+  //Delete Pref.
 
-
-  agentDelete(Agentid) {
-    this.Agentid = Agentid;
+  deleteprefrences(uid){
+    this.uid = uid;
     this.deleteAlert(
       "Are you sure you want to Delete?",
       "Delete",
       "Cancel"
     );
-  }
-  deletePart() {
-    if (this.tools.isNetwork()) {
-      let postData = new FormData();
-
-      postData.append('agentid', this.Agentid);
-
-      this.tools.openLoader();
-      this.apiService.bookNow().subscribe(data => {
-        this.tools.closeLoader();
-
-        let res: any = data;
-
-      }, (error: Response) => {
-        this.tools.closeLoader();
-        console.log(error);
-
-        let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
-      });
-
-    } else {
-      this.tools.closeLoader();
-    }
-
   }
   async deleteAlert(message, btnYes, btnNo) {
     const alert = await this.alertController.create({
@@ -104,56 +58,61 @@ export class AllClientPage {
         {
           text: btnYes ? btnYes : 'Yes',
           handler: () => {
-            this.deletePart();
+            this.deletePrefrences();
           }
         }
       ], backdropDismiss: true
     });
     return await alert.present();
   }
+  deletePrefrences() {
+    if (this.tools.isNetwork()) {
+      let postData = new FormData();
 
-  // getAgentList() {
-  //   if (this.tools.isNetwork()) {
-  //     this.tools.openLoader();
-  //     this.apiService.AgentList().subscribe(data => {
-  //       this.tools.closeLoader();
+      postData.append('uid', this.uid);
 
-  //       let res: any = data;
-  //       console.log(' agent > ', res);
-  //       this.AgentList = res.data.Agent;
-  //       this.itemsAll = res.data.Agent;
+      this.tools.openLoader();
+      this.apiService.RemovePreferences(postData).subscribe(data => {
+        this.tools.closeLoader();
 
-  //     }, (error: Response) => {
-  //       this.tools.closeLoader();
-  //       console.log(error);
+        let res: any = data;
+        this.tools.openNotification(res.msg);
+          this.getClientList();
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
 
-  //       let err: any = error;
-  //       this.tools.openAlertToken(err.status, err.error.message);
-  //     });
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
+      });
 
-  //   } else {
-  //     this.tools.closeLoader();
-  //   }
+    } else {
+      this.tools.closeLoader();
+    }
 
-  // }
+  }
 
-  // For Filter
-  // async ionChange(){
-  //   this.AgentList = await this.itemsAll;
-  //   const searchTerm =this.AgentName;  
-  //   if (!searchTerm) {
-  //     return;
-  //   }
-  
-  //   this.AgentList = this.AgentList.filter(currentDraw => {
-  //     if (currentDraw.agentname && searchTerm) {
-  //       return ((currentDraw.agentname.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (currentDraw.email.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)|| (currentDraw.phone.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
-  //     }
-  //   });
-  // }
-
-
-
+  //Add Pref.
+  addprefrences(uid){
+    this.addPrefrences(uid);
+  }
+  async addPrefrences(uid) {
+    const modal = await this.modalController.create({
+      component: AddPrefrencesComponent,
+      cssClass: 'change-preference-modal',
+      componentProps: { uid: uid },
+    
+    });
+    await modal.present();
+    await modal.onDidDismiss()
+      .then((data) => {
+        console.log('Selected Cart Items from Dilogs ',data.data);
+        if (data.data) {
+         // this.callApi(data.data) 
+        }
+      });
+  }
+  //Get All Client
   getClientList() {
     if (this.tools.isNetwork()) {
       this.tools.openLoader();
@@ -185,5 +144,22 @@ export class AllClientPage {
     }
 
   }
+
+    // For User Filter
+  async ionChange() {
+    console.log("click >>", this.client)
+    this.ClientList = await this.ALLClientList;
+    const searchTerm = this.client;
+    if (!searchTerm) {
+      return;
+    }
+
+    this.ClientList = this.ClientList.filter(currentDraw => {
+      if (currentDraw.client_name && searchTerm) {
+        return ((currentDraw.client_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (currentDraw.email_address.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (currentDraw.contact_phone.indexOf(searchTerm.toLowerCase()) > -1));
+      }
+    });
+  }
+
 
 }

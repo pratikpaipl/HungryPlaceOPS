@@ -13,10 +13,9 @@ import { ActionSheetController, AlertController, ModalController } from '@ionic/
   styleUrls: ['printeroption.page.scss'],
 })
 export class PrinterOptionPage {
-  Date: any;
-  time = 0;
-  newDate: string;
-  myDate: String = new Date().toISOString();
+  ResCopy=false;
+  CusCopy=false;
+  KitCopy=false;
 
   constructor(public tools: Tools, private route: ActivatedRoute,
     public alertController: AlertController,
@@ -25,38 +24,82 @@ export class PrinterOptionPage {
     public formBuilder: FormBuilder, private eventService: EventService,
     private apiService: ApiService, private router: Router) {
 
-      this.myDate = new Date(this.time + (1000 * 60 * 60 * 24)).toISOString();
-
-
   }
-  ionViewDidEnter() {
-    //this.getAgentList();
+
+ ionViewWillEnter() {
+    this.getPrinterOption();
+  }
+
+  UpdatePrinter(data,from) {
+    console.log("data >>",data)
+    console.log("from >>",from)
+    if(data==true){
+      this.getUpdatePrinterOption(false,from);
+    }else{
+      this.getUpdatePrinterOption(true,from);
+    }
   }
  
-  onChangeDate(date) {
-    console.log('Sel Date', date)
-    let selDate = this.Date.split('T')[0];
-    console.log('Selected Date split ', selDate.split('-'));
-    this.newDate = selDate.split('-')[2] + '.' + selDate.split('-')[1] + '.' + selDate.split('-')[0]
+  getPrinterOption() {
+    if (this.tools.isNetwork()) {
+      this.tools.openLoader();
+      this.apiService.getPrinterOption().subscribe(data => {
+        this.tools.closeLoader();
+
+        let res: any = data;
+        console.log("Response >>",res)
+         for (let index = 0; index < res.length; index++) {
+           const element = res[index];
+           if(element=="restaurant_copy"){
+            this.ResCopy=true;
+           }
+           if(element=="customer_copy"){
+            this.CusCopy=true;
+           }
+           if(element=="kitchen_copy"){
+            this.KitCopy=true;
+           } 
+         }
+     
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
+
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
+      });
+
+    } else {
+      this.tools.closeLoader();
+    }
+
   }
   
-  clickaddprinter(){
-    this.addprinter();
-  }
-  async addprinter() {
-    const modal = await this.modalController.create({
-      component: AddPrinterModelComponent,
-      cssClass: 'change-addprinter-modal',
-      componentProps: { value: 0 },
-    
-    });
-    await modal.present();
-    await modal.onDidDismiss()
-      .then((data) => {
-        console.log('Selected Cart Items from Dilogs ',data.data);
-        if (data.data) {
-         // this.callApi(data.data) 
-        }
+  getUpdatePrinterOption(Status,From) {
+    if (this.tools.isNetwork()) {
+      let postData = new FormData();
+
+      postData.append("isChecked",Status)
+      postData.append("printer_type",From)
+
+      this.tools.openLoader();
+      this.apiService.updatePrinterOption(postData).subscribe(data => {
+        this.tools.closeLoader();
+
+        let res: any = data;
+        console.log("Response >>",res)
+        this.getPrinterOption();
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
+
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
       });
+
+    } else {
+      this.tools.closeLoader();
+    }
+
   }
 }

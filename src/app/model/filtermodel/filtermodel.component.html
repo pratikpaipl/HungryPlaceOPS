@@ -8,7 +8,7 @@
                         <ion-label class="d-block tiitle f-25">Order Filter</ion-label>
                     </ion-col>
                     <ion-col class="btn_col">
-                        <ion-label class="d-block f-20" style="color: red !important; ">Reset</ion-label>
+                        <ion-label class="d-block f-20" style="color: red !important; " (click)="resetData()">Reset</ion-label>
                     </ion-col>
                 </ion-row>
                 <ion-row class="labels_row">
@@ -18,8 +18,8 @@
                 </ion-row>
                 <ion-row class="black_box">
                     <ion-col size="12">
-                        <ion-select okText="Ok" [(ngModel)]="Selstatus" [value]="Selstatus" placeholder="Select Status" cancelText="Dismiss" (ionChange)="onChangeState($event.target.value)">
-                            <ion-select-option *ngFor="let item of StatusList" [value]="item.Status">{{item.Status}}</ion-select-option>
+                        <ion-select okText="Ok" placeholder="All status" cancelText="Dismiss" (ionChange)="onChangeStatus($event.target.value)">
+                            <ion-select-option *ngFor="let status of statusList" value="{{status}}">{{status}}</ion-select-option>
                         </ion-select>
                     </ion-col>
                 </ion-row>
@@ -30,9 +30,10 @@
                 </ion-row>
                 <ion-row class="black_box">
                     <ion-col size="12">
-                        <ion-select okText="Ok" [(ngModel)]="Selstatus" [value]="Selstatus" placeholder="All Type" cancelText="Dismiss" (ionChange)="onChangeState($event.target.value)">
-                            <ion-select-option *ngFor="let item of StatusList" [value]="item.Status">{{item.Status}}</ion-select-option>
+                        <ion-select okText="Ok" placeholder="All Type" cancelText="Dismiss" (ionChange)="onChangeOrderType($event.target.value)">
+                            <ion-select-option *ngFor="let item of orderTypeList" value="{{item}}">{{item}}</ion-select-option>
                         </ion-select>
+
                     </ion-col>
                 </ion-row>
                 <ion-row class="labels_row">
@@ -43,7 +44,7 @@
                 <ion-row class="black_box">
                     <ion-col size='12'>
                         <ion-item>
-                            <ion-datetime displayFormat="DD MMM YYYY" pikerFormat="DD MMM YYYY" [(ngModel)]="Date" (ionChange)="onChangeDate($event.target.value)" placeholder="Select Date"></ion-datetime>
+                            <ion-datetime displayFormat="DD MMM YYYY" pikerFormat="DD MMM YYYY" [(ngModel)]="FromDate" (ionChange)="onChangeFromDate($event.target.value)" placeholder="Select Date"></ion-datetime>
                             <ion-icon class="calendar-icon" name="calendar-outline" item-right></ion-icon>
                         </ion-item>
                     </ion-col>
@@ -56,7 +57,7 @@
                 <ion-row class="black_box">
                     <ion-col size='12'>
                         <ion-item>
-                            <ion-datetime displayFormat="DD MMM YYYY" pikerFormat="DD MMM YYYY" [(ngModel)]="Date" (ionChange)="onChangeDate($event.target.value)" placeholder="Select Date"></ion-datetime>
+                            <ion-datetime displayFormat="DD MMM YYYY" pikerFormat="DD MMM YYYY" [(ngModel)]="ToDate" (ionChange)="onChangeToDate($event.target.value)" placeholder="Select Date"></ion-datetime>
                             <ion-icon class="calendar-icon" name="calendar-outline" item-right></ion-icon>
                         </ion-item>
                     </ion-col>
@@ -68,14 +69,14 @@
                 </ion-row>
                 <ion-row class="black_box">
                     <ion-col size="12">
-                        <ion-select okText="Ok" [(ngModel)]="Selstatus" [value]="Selstatus" placeholder="Select" cancelText="Dismiss" (ionChange)="onChangeState($event.target.value)">
-                            <ion-select-option *ngFor="let item of StatusList" [value]="item.Status">{{item.Status}}</ion-select-option>
+                        <ion-select okText="Ok" placeholder="Sort by" cancelText="Dismiss" (ionChange)="onChangeSortby($event.target.value)">
+                            <ion-select-option *ngFor="let item of orderSortList" value="{{item}}">{{item}}</ion-select-option>
                         </ion-select>
                     </ion-col>
                 </ion-row>
                 <ion-row class="labels_row">
                     <ion-col size="12">
-                    <ion-button class="btn-red" type="submit">Submit</ion-button>
+                        <ion-button class="btn-red" (click)="submit()">Submit</ion-button>
                     </ion-col>
                 </ion-row>
             </ion-col>
