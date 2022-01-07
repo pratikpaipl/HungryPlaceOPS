@@ -30,10 +30,12 @@ export class OrderHistoryPage {
 
   }
 
-  ngOnInit() { 
-    this.getOrderData('','','');
+  // ngOnInit() { 
+  //   this.getOrderData('','','');
+  // }
+  ionViewWillEnter() {
+    this.getOrderData('','','','','','');
   }
-
 
   // Open Filter
 
@@ -52,12 +54,9 @@ export class OrderHistoryPage {
     await modal.onDidDismiss()
       .then((data) => {
         console.log('Selected Cart Items from Dilogs ',data);
-        console.log("aa >>",data[0].SelStatus)
-
         if (data) {
-          console.log("aa >>",data[0].SelStatus)
-         // this.getOrderData(data.SelStatus,'','');
-
+          this.getOrderData(data.data[0].SelStatus,data.data[1].SelOrderType,"",
+            data.data[2].SelFromDate,data.data[3].SelToDate,data.data[4].SelSortBy);
         }
       });
   }
@@ -67,10 +66,10 @@ export class OrderHistoryPage {
     this.router.navigateByUrl("orderdetail/"+order_id);
   }
 
-  getOrderData(txt_status,txt_order_type,txt_search) {
+  getOrderData(txt_status,txt_order_type,txt_search,txt_from_date,txt_to_date,txt_sort_type) {
     if (this.tools.isNetwork()) {
       this.tools.openLoader();
-      this.apiService.getAllOrder(txt_status,txt_order_type,txt_search).subscribe(data => {
+      this.apiService.getAllOrder(txt_status,txt_order_type,txt_search,txt_from_date,txt_to_date,txt_sort_type).subscribe(data => {
         this.tools.closeLoader();
 
         let res: any = data;
@@ -101,8 +100,8 @@ export class OrderHistoryPage {
   }
 
 
-     // For User Filter
-     async ionChange() {
+  // For User Filter
+   async ionChange() {
       this.OrderList = await this.ALLOrderList;
       const searchTerm = this.CustomerName;
       if (!searchTerm) {
@@ -114,7 +113,7 @@ export class OrderHistoryPage {
           return ((currentDraw.customer_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
         }
       });
-    }
+  }
   
 
 }

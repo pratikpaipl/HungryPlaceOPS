@@ -18,7 +18,7 @@
                 </ion-row>
                 <ion-row class="black_box">
                     <ion-col size="12">
-                        <ion-select okText="Ok" placeholder="All status" cancelText="Dismiss" (ionChange)="onChangeStatus($event.target.value)">
+                        <ion-select [(ngModel)]="Status" okText="Ok" placeholder="All status" cancelText="Dismiss">
                             <ion-select-option *ngFor="let status of statusList" value="{{status}}">{{status}}</ion-select-option>
                         </ion-select>
                     </ion-col>
@@ -30,7 +30,7 @@
                 </ion-row>
                 <ion-row class="black_box">
                     <ion-col size="12">
-                        <ion-select okText="Ok" placeholder="All Type" cancelText="Dismiss" (ionChange)="onChangeOrderType($event.target.value)">
+                        <ion-select [(ngModel)]="OrderType" okText="Ok" placeholder="All Type" cancelText="Dismiss">
                             <ion-select-option *ngFor="let item of orderTypeList" value="{{item}}">{{item}}</ion-select-option>
                         </ion-select>
 
@@ -69,7 +69,7 @@
                 </ion-row>
                 <ion-row class="black_box">
                     <ion-col size="12">
-                        <ion-select okText="Ok" placeholder="Sort by" cancelText="Dismiss" (ionChange)="onChangeSortby($event.target.value)">
+                        <ion-select [(ngModel)]="SortBY" okText="Ok" placeholder="Sort by" cancelText="Dismiss">
                             <ion-select-option *ngFor="let item of orderSortList" value="{{item}}">{{item}}</ion-select-option>
                         </ion-select>
                     </ion-col>

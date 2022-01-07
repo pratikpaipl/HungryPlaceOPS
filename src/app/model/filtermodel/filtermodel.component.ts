@@ -19,17 +19,20 @@ export class FilterModelComponent implements OnInit {
   FromDate: any;
   ToDate: any;
 
-  SelStatus ='';
-  SelOrderType='';
-  SelSortBy='';
-
-
+  // Selected Value
   SelFromDate='';
   SelToDate='';
 
   // SelFromDate: String = new Date().toISOString();
   // SelToDate: String = new Date().toISOString();
+
+  //For take Filter Data
   SubmitData = [];
+
+  //for reset value
+  Status: string;
+  OrderType: string;
+  SortBY: string;
 
   @ViewChild('rating') rating : any;
 
@@ -37,26 +40,27 @@ export class FilterModelComponent implements OnInit {
     //this.mId = this.navParams.get('mId');
     //this.FromDate = this.SelFromDate.split('T')[0];
    // this.ToDate = this.SelToDate.split('T')[0];
-
   }
 
   ngOnInit() {
     this.getTodayOrderData();
   }
 
-  onChangeStatus(value){
-    this.SelStatus=value;
-    console.log("status value >>>",value);
-  }
-  onChangeOrderType(value){
-    this.SelOrderType=value;
+  // onChangeStatus(value){
+  //   this.SelStatus=value;
+  //   console.log("status value >>>",value);
+  // }
+  // onChangeOrderType(value){
+  //   this.SelOrderType=value;
 
-    console.log("type value >>>",value);
-  }
-  onChangeSortby(value){
-    this.SelSortBy=value;
-    console.log("type value >>>",value);
-  }
+  //   console.log("type value >>>",value);
+  // }
+  // onChangeSortby(value){
+  //   this.SelSortBy=value;
+  //   console.log("type value >>>",value);
+  // }
+
+
   onChangeFromDate(date) {
   //  console.log('Sel Date >>>>>>>>>>>>>>', date)
      this.SelFromDate= this.FromDate.split('T')[0];
@@ -75,18 +79,26 @@ export class FilterModelComponent implements OnInit {
   }
   
   resetData(){
-    this.SelStatus=''
-    this.SelOrderType=''
+   
     this.SelFromDate=''
     this.SelToDate=''
-    this.SelSortBy=''
-  }
-  submit(){
-    this.SubmitData = [{ SelStatus: this.SelStatus},{ SelOrderType: this.SelOrderType},{ SelFromDate: this.SelFromDate},{ SelToDate: this.SelToDate},{ SelSortBy: this.SelSortBy}]
-    this.modalCtrl.dismiss((this.SubmitData));
-    console.log("data >>",this.SelStatus+" >>> "+ this.SelOrderType +" >>> "+this.SelFromDate+" >> "+ this.SelToDate+" >> "+this.SelSortBy)
+
+    this.SubmitData=null;
+
+    this.Status = null;
+    this.OrderType = null;
+    this.SortBY = null;
+    this.FromDate = null;
+    this.ToDate = null;
+    
   }
 
+
+  submit(){
+    this.SubmitData = [{ SelStatus: this.Status},{ SelOrderType: this.OrderType},{ SelFromDate: this.SelFromDate},{ SelToDate: this.SelToDate},{ SelSortBy: this.SortBY}]
+    this.modalCtrl.dismiss((this.SubmitData));
+    console.log("data >>",this.Status+" >>> "+ this.OrderType +" >>> "+this.SelFromDate+" >> "+ this.SelToDate+" >> "+this.SortBY)
+  }
 
 
   getTodayOrderData() {

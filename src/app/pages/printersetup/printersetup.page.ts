@@ -15,6 +15,8 @@ import { ActionSheetController, AlertController, ModalController } from '@ionic/
 export class PrinterSetupPage {
   PrinterList = [];
   PrinterId='';
+  Connected=false;
+  ConnectValue ="Not Connected";
 
   constructor(public tools: Tools, private route: ActivatedRoute,
     public alertController: AlertController,
@@ -22,8 +24,6 @@ export class PrinterSetupPage {
     public actionSheetCtrl: ActionSheetController,
     public formBuilder: FormBuilder, private eventService: EventService,
     private apiService: ApiService, private router: Router) {
-
-
 
   }
   
@@ -73,7 +73,7 @@ export class PrinterSetupPage {
           for (let index = 0; index < this.PrinterList.length; index++) {
             const element = this.PrinterList[index];
             console.log("IP >>",element.printer_ip)
-           // this.checkPrinter(element.printer_ip); 
+            this.checkPrinter(element.printer_ip); 
           }
         }else{
           this.tools.openAlert(res.msg);
@@ -179,23 +179,23 @@ export class PrinterSetupPage {
 
   checkPrinter(IP) {
     if (this.tools.isNetwork()) {
-      this.tools.openLoader();
+     // this.tools.openLoader();
       this.apiService.CheckPrinterIsConnected(IP).subscribe(data => {
-        this.tools.closeLoader();
+        //this.tools.closeLoader();
 
         let res: any = data;
-
-        if (res.code == 1) {
-          
-        }else{
-          this.tools.openAlert(res.msg);
-        }
+        console.log("response >>",res)
+          this.Connected=true;
+          this.ConnectValue ="Connected";
+        
       }, (error: Response) => {
-        this.tools.closeLoader();
+       // this.tools.closeLoader();
         console.log(error);
-
         let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
+        console.log("error >> ",err.status);
+        this.Connected=false;
+        this.ConnectValue ="Not Connected";
+       // this.tools.openAlertToken(err.status, err.error.message);
       });
 
     } else {

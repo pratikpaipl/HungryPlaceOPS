@@ -20,12 +20,14 @@ export class HomePage {
   //For Today Order
   TodayOrderList = [];
   ALLTodayOrderList = [];
-  machineName = "";
+  CustomerName = "";
 
   DTQty = 0;
   CTQty = 0;
 
-  
+  SelStatus = "";
+  SelType = "";
+
   constructor(private menu: MenuController, public tools: Tools,
     private router: Router, private apiService: ApiService) {
     this.user = this.apiService.getUserData();
@@ -45,6 +47,10 @@ export class HomePage {
 
   // Button Click Event
 
+  goDetail(order_id) {
+    this.router.navigateByUrl("orderdetail/"+order_id);
+  }
+  
   openFirst() {
     this.menu.enable(true, "first");
     this.menu.open("first");
@@ -106,12 +112,14 @@ export class HomePage {
     
   }
 
-  onChangeOrderStatus(value){
-    console.log("type value >>>",value);
-  }
-  onChangeOrderType(value){
-    console.log("type value >>>",value);
-  }
+  // onChangeOrderStatus(value){
+  //   this.SelStatus=value;
+  //   console.log("status value >>>",value);
+  // }
+  // onChangeOrderType(value){
+  //   this.SelType=value;
+  //   console.log("type value >>>",value);
+  // }
 
   DTqty(item,type) {
   console.log("item DTqty >>>",typeof item);
@@ -226,22 +234,61 @@ export class HomePage {
 
   }
    
-  // For User Filter
-  // async ionChangeUser() {
-  //   console.log("click >>", this.machineName)
-  //   this.MachineList = await this.ALLMachineList;
-  //   const searchTerm = this.machineName;
-  //   if (!searchTerm) {
-  //     return;
-  //   }
+// For Search Filter
+async ionChange() {
+  this.TodayOrderList = await this.ALLTodayOrderList;
+  const searchTerm = this.CustomerName;
+  if (!searchTerm) {
+    return;
+  }
 
-  //   this.MachineList = this.MachineList.filter(currentDraw => {
-  //     if (currentDraw.MachineName && searchTerm) {
-  //       return ((currentDraw.MachineName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
-  //     }
-  //   });
-  // }
+  this.TodayOrderList = this.TodayOrderList.filter(currentDraw => {
+    if (currentDraw.customer_name && searchTerm) {
+      return ((currentDraw.customer_name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (currentDraw.bill_total.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (currentDraw.order_id.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)|| (currentDraw.payment_type.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
+    }
+  });
+}
+
+// For Status Filter
+async onChangeOrderStatus() {
+  this.TodayOrderList = await this.ALLTodayOrderList;
+  const searchTerm = this.SelStatus;
+  if (!searchTerm) {
+    return;
+  }
+
+  if(searchTerm == 'All Status'){
+    this.TodayOrderList = this.ALLTodayOrderList;
+
+  }else{
+    this.TodayOrderList = this.TodayOrderList.filter(currentDraw => {
+      if (currentDraw.status && searchTerm) {
+        return ((currentDraw.status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
+      }
+    });
+  }
+
+  }
 
 
+  // For Type Filter
+async onChangeOrderType() {
+  this.TodayOrderList = await this.ALLTodayOrderList;
+  const searchTerm = this.SelStatus;
+  if (!searchTerm) {
+    return;
+  }
 
+  if(searchTerm == 'All Status'){
+    this.TodayOrderList = this.ALLTodayOrderList;
+
+  }else{
+    this.TodayOrderList = this.TodayOrderList.filter(currentDraw => {
+      if (currentDraw.status && searchTerm) {
+        return ((currentDraw.status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
+      }
+    });
+  }
+
+  }
 }

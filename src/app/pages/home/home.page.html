@@ -115,7 +115,7 @@
                 <ion-col size="6">
                     <ion-label class="page_title">Select Status</ion-label>
                     <div class="mt-5">
-                        <ion-select okText="Ok" placeholder="All status" class="customm_select" cancelText="Dismiss" (ionChange)="onChangeOrderType($event.target.value)">
+                        <ion-select okText="Ok" placeholder="All status" class="customm_select" cancelText="Dismiss" [(ngModel)]="SelStatus" (ionChange)="onChangeOrderStatus()">
                             <ion-select-option *ngFor="let status of statusList" value="{{status}}">{{status}}</ion-select-option>
                         </ion-select>
                     </div>
@@ -124,7 +124,7 @@
                     <ion-label class="page_title">Order Type</ion-label>
                     <div class="mt-5">
                         <!-- formControlName='agent' -->
-                        <ion-select okText="Ok" placeholder="All Type" class="customm_select" cancelText="Dismiss" (ionChange)="onChangeOrderType($event.target.value)">
+                        <ion-select okText="Ok" placeholder="All Type" class="customm_select" cancelText="Dismiss" [(ngModel)]="SelType" (ionChange)="onChangeOrderType()">
                             <ion-select-option *ngFor="let item of orderTypeList" value="{{item}}">{{item}}</ion-select-option>
                         </ion-select>
                     </div>
@@ -144,11 +144,11 @@
                         </ion-col>
                     </ion-row>
 
-                    <ion-row class="p-0" *ngIf="TodayOrderList?.length != 0">
+                    <ion-row class="p-0" *ngIf="ALLTodayOrderList?.length != 0">
                         <ion-col class="p-0">
                             <div class="search_box">
                                 <ion-img class="search_icon" src="../../../assets/images/search.png"></ion-img>
-                                <ion-input type="search" placeholder="Search" [(ngModel)]="machineName" (ionChange)="ionChangeUser()"></ion-input>
+                                <ion-input type="search" placeholder="Search" [(ngModel)]="CustomerName" (ionChange)="ionChange()"></ion-input>
                             </div>
                         </ion-col>
                     </ion-row>
@@ -159,7 +159,7 @@
                         </ion-col>
                     </ion-row>
 
-                    <ion-row class="box-black" *ngFor="let order of TodayOrderList ;">
+                    <ion-row class="box-black" *ngFor="let order of TodayOrderList ;" (click)="goDetail(order.order_id)">
                         <ion-col class="list_cols">
                             <ion-img style="position: absolute; top: 0px; left: 0px; width: 40px; z-index: 1;" src="../../../assets/images/new.png" *ngIf="order.viewed=='1'"></ion-img>
                             <ion-row class="content_row">
@@ -190,13 +190,12 @@
                                     <ion-button class="btn-blue">{{order.payment_type}}</ion-button>
                                 </ion-col>
                                 <ion-col>
-                                    <ion-button [ngClass]="{'btn-orange': order.status === 'Pending',
-                                     'btn-green' : order.status === 'Delivered',
-                                     'btn-orange' : order.status === 'Refunded Fully',
-                                     'btn-orange' : order.status === 'Refunded Partially',
-                                     'btn-green' : order.status === 'Accepted',
-                                     'btn-blue' : order.status === 'Assigned',
-                                     'btn-redd' : order.status === 'Cancelled'}">
+                                    <ion-button [ngClass]="{
+                                        'btn-orange' : order.status === 'Refunded Fully' 
+                                        || order.status === 'Refunded Partially' || order.status === 'Pending',
+                                        'btn-green' : order.status === 'Accepted' || order.status === 'Delivered',
+                                        'btn-blue' : order.status === 'Assigned',
+                                        'btn-redd' : order.status === 'Cancelled'}">
                                         {{order.status}}</ion-button>
                                 </ion-col>
                             </ion-row>

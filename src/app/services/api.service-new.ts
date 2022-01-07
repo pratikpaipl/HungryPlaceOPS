@@ -102,31 +102,7 @@ export class ApiService {
 
     return this.http.post(environment.BaseUrl + "login", postData, this.httpOptions);
   }
-  // login(username, password): any {
-
-  //   var dID;
-  //   if (!localStorage.getItem('PlearID')) {
-  //     dID = localStorage.getItem('PlearID') == '' ? "111111" : localStorage.getItem('PlearID');
-  //   } else {
-  //     dID = '111111'
-  //   }
-
-  //   var httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Access-Control-Allow-Origin': '*',
-  //       // 'Authorization': this.bacisAuth,
-  //       'api-key': environment.apikey,
-  //     })
-  //   }
-
-  //   let postData = new FormData();
-  //   // postData.append('file', imageFile);
-  //   postData.append("username", username);
-  //   postData.append("password", btoa(password));
-  //   postData.append("DeviceID", dID);
-  //   return this.http.post(environment.BaseUrl + 'login', postData, httpOptions);
-  // }
-  
+    
   forgotPassword(email): any {
    
     let postData = new FormData();
@@ -170,11 +146,14 @@ export class ApiService {
 
     return this.http.post(environment.BaseUrl + 'DriversCollectionList', postData, this.httpOptions);
   }
-  getAllOrder(txt_status,txt_order_type,txt_search): any {
+  getAllOrder(txt_status,txt_order_type,txt_search,txt_from_date,txt_to_date,txt_sort_type): any {
     let postData = new FormData();
     postData.append("txt_status", txt_status);
     postData.append("txt_order_type", txt_order_type);
     postData.append("txt_search", txt_search);
+    postData.append("txt_from_date", txt_from_date);
+    postData.append("txt_to_date", txt_to_date);
+    postData.append("txt_sort_type", txt_sort_type);
 
     return this.http.post(environment.BaseUrl + 'GetAllOrders', postData, this.httpOptions);
   }
@@ -218,6 +197,7 @@ export class ApiService {
   CheckPrinterIsConnected(IP): any {
     return this.http.post('https://'+IP+'/cgi-bin/epos/service.cgi?devid=local_printer', "", this.httpOptions);
   }
+  
   getPreferences(Data): any {
     return this.http.post(environment.BaseUrl + 'get_preference', Data, this.httpOptions);
   }

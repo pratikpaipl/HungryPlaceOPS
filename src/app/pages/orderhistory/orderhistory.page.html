@@ -70,7 +70,8 @@
                     </ion-col>
                     <ion-col>
                         <ion-button [ngClass]="{
-                                     'btn-orange' : order.status === 'Refunded Fully' || order.status === 'Refunded Partially' || order.status === 'Pending',
+                                     'btn-orange' : order.status === 'Refunded Fully' 
+                                     || order.status === 'Refunded Partially' || order.status === 'Pending',
                                      'btn-green' : order.status === 'Accepted' || order.status === 'Delivered',
                                      'btn-blue' : order.status === 'Assigned',
                                      'btn-redd' : order.status === 'Cancelled'}">
