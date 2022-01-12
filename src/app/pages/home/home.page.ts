@@ -275,6 +275,12 @@ export class HomePage {
         let res: any = data;
         console.log(' Response >>> ', res);
 
+        if(res.details.BellRang !=0){
+          console.log(' callSound >>> ', "Ringing");
+          callSound();
+
+        }
+
         this.DTQty=res.details.merchantEstimationdetails.merchant_delivery_estimation
         this.CTQty=res.details.merchantEstimationdetails.merchant_pickup_estimation
 
