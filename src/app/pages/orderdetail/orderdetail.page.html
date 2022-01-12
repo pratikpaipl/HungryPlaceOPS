@@ -34,11 +34,8 @@
                     <ion-col class="right_col">
                         <!-- <ion-label class="d-block f-11" style="color: orange;">{{DetailData.status}}</ion-label> -->
                         <ion-label class="d-block f-11" [ngClass]="{
-                        'orangecolor': DetailData.status === 'Pending',
-                        'greencolor' : DetailData.status === 'Delivered',
-                        'orangecolor' : DetailData.status === 'Refunded Fully',
-                        'orangecolor' : DetailData.status === 'Refunded Partially',
-                        'greencolor' : DetailData.status === 'Accepted',
+                        'orangecolor': DetailData.status === 'Pending' ||DetailData.status === 'Refunded Fully'||DetailData.status === 'Refunded Partially',
+                        'greencolor' : DetailData.status === 'Delivered' || DetailData.status === 'Accepted',
                         'bluecolor' : DetailData.status === 'Assigned',
                         'radcolor' : DetailData.status === 'Cancelled'}">
                             {{DetailData.status}}</ion-label>
@@ -64,7 +61,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col class="right_col">
-                        <ion-label class="d-block" style="color: red !important; margin-left: -22px !important; ">View Location</ion-label>
+                        <ion-label class="d-block" style="color: red !important; margin-left: -22px !important; " (click)="showMap(ClientInfo.delivery_lat,ClientInfo.delivery_lng)">View Location</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -218,10 +215,10 @@
             </ion-col>
         </ion-row>
         <ion-row class="button_box">
-            <ion-col *ngIf="DetailData.status === 'Accepted' || 'Refunded Partially'">
+            <ion-col *ngIf="DetailData.status === 'Accepted' || DetailData.status ==='Refunded Partially'">
                 <ion-button class="btn-blue" (click)="assignDriver()">ASSIGN DRIVER</ion-button>
             </ion-col>
-            <ion-col *ngIf="DetailData.payment_type != 'CASH'">
+            <ion-col *ngIf="DetailData.payment_type != 'CASH' && DetailData.payment_type != 'COD'">
                 <ion-button class="btn-orange" (click)="refund()">REFUND</ion-button>
             </ion-col>
         </ion-row>

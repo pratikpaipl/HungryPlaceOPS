@@ -50,7 +50,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/printeroption/printeroption.module').then(m => m.PrinterOptionPageModule)
   },
   {
-    path: 'orderrefund',
+    path: 'orderrefund/:order_id',
     loadChildren: () => import('./pages/orderrefund/orderrefund.module').then(m => m.OrderRefundPageModule)
   },
 ];

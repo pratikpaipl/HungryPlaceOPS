@@ -4,53 +4,53 @@ import { ModalController, NavParams, IonSlides } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Tools } from 'src/app/shared/tools';
 @Component({
-  selector: 'app-changestatus',
-  templateUrl: './changestatus.component.html',
-  styleUrls: ['./changestatus.component.scss'],
+  selector: 'app-changedriver',
+  templateUrl: './changedriver.component.html',
+  styleUrls: ['./changedriver.component.scss'],
 })
-export class ChangeStatusModelComponent  {
- 
-  StatusList=[];
-  selStatus='';
-  comment='';
+export class ChangeDriverModelComponent  {
 
-  order_id='';
-
-  constructor(public navParams: NavParams, public router: Router, private apiService: ApiService, public tools: Tools, public modalCtrl: ModalController) {
-    this.order_id = this.navParams.get('order_id');
-    console.log("UID >",this.order_id)
+  DriverList=[];
+  selDriver='';
+  //driverID='';
+  constructor(public navParams: NavParams, public router: Router, private apiService: ApiService,
+     public tools: Tools, public modalCtrl: ModalController) {
   }
+
   ionViewWillEnter() {
-    this.getStatus();
+    this.getDriver();
   }
 
   itemAdd(event) {
-    this.selStatus=event.detail.value;
+    this.selDriver=event.detail.value;
     console.log("event :: ", event.detail.value);
   }
   submit(){
-    console.log("submit > :: ", this.selStatus);
-    console.log("submit > :: ", this.comment);
-    if(this.selStatus != ''){
-      this.modalCtrl.dismiss(this.selStatus,this.comment);
+    console.log("submit > :: ", this.selDriver);
+    if(this.selDriver != ''){
+      this.modalCtrl.dismiss(this.selDriver);
     }else{
-      this.tools.openAlert("Please Select Status")
+      this.tools.openAlert("Please Select Driver")
     }
+
   }
  
 
-  getStatus() {
+  getDriver() {
     if (this.tools.isNetwork()) {
       this.tools.openLoader();
       let postData = new FormData();
-      postData.append("order_id",  this.order_id );
-
-      this.apiService.getStatus(postData).subscribe(data => {
+      
+      this.apiService.getDriver(postData).subscribe(data => {
         this.tools.closeLoader();
 
         let res: any = data;
         console.log(' Response >>> ', res);
-        this.StatusList=res.details.status_list;
+        this.DriverList=res.details;
+        // for (let index = 0; index < this.DriverList.length; index++) {
+        //   const element = this.DriverList[index];
+        //   if(element.id ==)
+        // }
       }, (error: Response) => {
         this.tools.closeLoader();
         console.log(error);
@@ -64,7 +64,6 @@ export class ChangeStatusModelComponent  {
     }
 
   }
-  
 
   dismissModal() {
     this.modalCtrl.dismiss('');
@@ -73,6 +72,5 @@ export class ChangeStatusModelComponent  {
   cancel() {
     this.modalCtrl.dismiss('');
   }
-
 
 }

@@ -29,7 +29,7 @@ export class OrderSumaryPage {
       this.Date = this.myDate.split('T')[0];
   }
 
-  ngOnInit() { 
+  ionViewWillEnter() { 
     this.getOrderSummary();
   }
 

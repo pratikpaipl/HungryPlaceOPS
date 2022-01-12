@@ -1,8 +1,13 @@
 import { ApiService } from 'src/app/services/api.service-new';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { MenuController } from "@ionic/angular";
+import { MenuController, ToastController } from "@ionic/angular";
 import { Tools } from 'src/app/shared/tools';
+import {InAppBrowser, InAppBrowserOptions} from "@ionic-native/in-app-browser/ngx";
+import EscPosEncoder from 'esc-pos-encoder-ionic';
+
+declare const callSound: any;
+declare var Socket: any;
 
 @Component({
   selector: 'app-home',
@@ -10,6 +15,31 @@ import { Tools } from 'src/app/shared/tools';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+
+  options: InAppBrowserOptions = {
+    location : 'no',//Or 'no'
+     hidden : 'no', //Or  'yes'
+    clearcache : 'yes',
+    clearsessioncache : 'yes',
+     zoom : 'no',//Android only ,shows browser zoom controls
+    hardwareback : 'no',
+     mediaPlaybackRequiresUserAction : 'no',
+     shouldPauseOnSuspend : 'no', //Android only
+     closebuttoncaption : 'Close', //iOS only
+     disallowoverscroll : 'no', //iOS only
+     toolbar : 'no', //iOS only
+     enableViewportScale : 'no', //iOS only
+     allowInlineMediaPlayback : 'no',//iOS only
+     presentationstyle : 'pagesheet',//iOS only
+     fullscreen : 'yes',//Windows only
+     footer:'no',
+  };
+  ipaddress= '192.168.1.100';
+  // * Set your variable here
+  //IP = '192.168.1.123';
+  PORT = '9100';
+  // * End
+
   user: any;
 
   //For Status List
@@ -28,7 +58,8 @@ export class HomePage {
   SelStatus = "";
   SelType = "";
 
-  constructor(private menu: MenuController, public tools: Tools,
+  constructor(private menu: MenuController, public tools: Tools,private iab: InAppBrowser,
+    private toast: ToastController,
     private router: Router, private apiService: ApiService) {
     this.user = this.apiService.getUserData();
     // events.subscribe('profileUpdate', (item) => {
@@ -50,6 +81,26 @@ export class HomePage {
   goDetail(order_id) {
     this.router.navigateByUrl("orderdetail/"+order_id);
   }
+ 
+  HomeTableBooking(){
+    console.log("Open Browser");
+    let target = "_blank";
+    const browser = this.iab.create("https://hungrydev.cuisine.je/ops/index.html",target,this.options);
+    browser.on("loadstop").subscribe((event) => {
+      console.log("orderData.url_details ", event.url);
+      console.log("loadstop ==> ", event.url);
+    });
+
+    browser.on("exit").subscribe(
+      (event) => {
+        console.log("Log ", event);
+      }
+      // ,
+      // (err) => {
+      //     console.log("InAppBrowser Loadstop Event Error: " + err);
+      // }
+    );
+  }
   
   openFirst() {
     this.menu.enable(true, "first");
@@ -69,7 +120,23 @@ export class HomePage {
   }
   tableBooking() {
     this.menu.close();
-    this.router.navigateByUrl("home");
+    console.log("Open Browser");
+    let target = "_blank";
+    const browser = this.iab.create("https://hungrydev.cuisine.je/ops/index.html",target,this.options);
+    browser.on("loadstop").subscribe((event) => {
+      console.log("orderData.url_details ", event.url);
+      console.log("loadstop ==> ", event.url);
+    });
+
+    browser.on("exit").subscribe(
+      (event) => {
+        console.log("Log ", event);
+      }
+      // ,
+      // (err) => {
+      //     console.log("InAppBrowser Loadstop Event Error: " + err);
+      // }
+    );
   }
   allClientList() {
     this.menu.close();
@@ -106,10 +173,58 @@ export class HomePage {
     }
   }
   gotoMerchant(){
-
+    callSound();
   }
   printer(){
-    
+    const socket = new Socket();
+
+    // socket receive bytecode, therefore we need to create a byte stream by using esc-pos-encoder-ionic
+    const encoder = new EscPosEncoder();
+
+
+
+    const result = encoder.initialize();
+
+    result
+      .align('center')
+      .newline()
+      .line('Congratulation, print success')
+      .line('IP : ' + this.ipaddress)
+      .line('Port : ' + this.PORT)
+      .line('From ionic app by Addit InfoTech')
+      .newline()
+      .newline()
+      .newline()
+      .newline()
+      .newline()
+      .newline()
+      .cut();
+
+    const resultByte = result.encode();
+
+    // send byte code into the printer
+    socket.open(
+      this.ipaddress,
+      this.PORT,
+      () => {
+        socket.write(resultByte, () => {
+          socket.shutdownWrite();
+        });
+      },
+      (err) => {
+        console.error(err);
+        this.presentToast(err);
+
+      }
+    );
+  }
+  async presentToast(msg) {
+    const toast = await this.toast.create({
+      message: msg,
+      position: 'top',
+      duration: 2000
+    });
+    toast.present();
   }
 
   // onChangeOrderStatus(value){
@@ -274,18 +389,18 @@ async onChangeOrderStatus() {
   // For Type Filter
 async onChangeOrderType() {
   this.TodayOrderList = await this.ALLTodayOrderList;
-  const searchTerm = this.SelStatus;
+  const searchTerm = this.SelType;
   if (!searchTerm) {
     return;
   }
 
-  if(searchTerm == 'All Status'){
+  if(searchTerm == 'All Type'){
     this.TodayOrderList = this.ALLTodayOrderList;
 
   }else{
     this.TodayOrderList = this.TodayOrderList.filter(currentDraw => {
-      if (currentDraw.status && searchTerm) {
-        return ((currentDraw.status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
+      if (currentDraw.trans_type && searchTerm) {
+        return ((currentDraw.trans_type.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
       }
     });
   }

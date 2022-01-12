@@ -81,7 +81,7 @@
                 <ion-col class="tab_nav">
                     <ion-label class="active">TAKEAWAYS</ion-label>
                 </ion-col>
-                <ion-col class="tab_nav">
+                <ion-col class="tab_nav" (click)="HomeTableBooking()">
                     <ion-label>TABLE BOOKING</ion-label>
                 </ion-col>
             </ion-row>
@@ -134,7 +134,7 @@
 
         <ion-grid class="container" style="padding-bottom: 30px; border-radius: 20px 20px 0 0 !important; background: white !important;">
             <ion-row class="p-0">
-                <ion-col class="p-0" size='12'>
+                <ion-col class="p-0" size='12' style="margin-bottom: 30px;">
                     <ion-row class="button_box" style="margin-top: 10px;">
                         <ion-col>
                             <ion-button class="btn-red" (click)="driverSummary()">Driver Summary</ion-button>

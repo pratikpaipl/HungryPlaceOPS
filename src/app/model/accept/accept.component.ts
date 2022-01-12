@@ -8,41 +8,17 @@ import { Tools } from 'src/app/shared/tools';
   templateUrl: './accept.component.html',
   styleUrls: ['./accept.component.scss'],
 })
-export class AcceptComponent implements OnInit {
-  defValue: any;
-  comment= '';
-  mId: any;
-  Services=[];
-  itemsCuisines=[];
-  rat = 0;
-  rate = 0;
-  @ViewChild('rating') rating : any;
+export class AcceptComponent  {
+  comment='';
 
-  constructor(public navParams: NavParams, public router: Router, private apiService: ApiService, public tools: Tools, public modalCtrl: ModalController) {
-    this.mId = this.navParams.get('mId');
+  constructor(public navParams: NavParams, public router: Router, 
+    private apiService: ApiService, public tools: Tools, public modalCtrl: ModalController) {
   }
 
-  ngOnInit() {
-    // this.cuisineList()
+  
+  submit(){
+      this.modalCtrl.dismiss(this.comment);
   }
-  onModelChange(rating) {
-    console.log("changed rating: ", rating);
-     this.rat = rating;
-  }
-  // addReview(){
-  //   var msg ='';
-  //   if(this.rat == 0 || this.speinst == ''){
-  //     msg = msg + 'Rating & Review is required.'
-  //   } 
-  //   if (msg != '') {
-  //     this.tools.openAlert(msg);
-  //   } else {    
-  //     var selItem = { "rating":this.rat,  "review": this.speinst }    
-  //      this.modalCtrl.dismiss(selItem);
-  //   }
-
-  // }
-
  
 
   dismissModal() {

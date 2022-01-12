@@ -32,19 +32,20 @@ import { AddPrefrencesComponent } from './model/add-prefrences/add-prefrences.co
 import { FilterModelComponent } from './model/filtermodel/filtermodel.component';
 import { AssignDriverModelComponent } from './model/assigndriver/assigndriver.component';
 import { ChangeStatusModelComponent } from './model/changestatus/changestatus.component';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ChangeDriverModelComponent } from './model/changedriver/changedriver.component';
 
 @NgModule({
   declarations: [AppComponent,AddPrefrencesComponent,FilterModelComponent,DeclineComponent,
-    AssignDriverModelComponent,ChangeStatusModelComponent,
+    AssignDriverModelComponent,ChangeStatusModelComponent,ChangeDriverModelComponent,
     AddPrinterModelComponent,AddOnModelComponent,AcceptComponent],
   entryComponents: [AddPrefrencesComponent,FilterModelComponent,DeclineComponent,
-    AssignDriverModelComponent,ChangeStatusModelComponent,
+    AssignDriverModelComponent,ChangeStatusModelComponent,ChangeDriverModelComponent,
     AddPrinterModelComponent,AddOnModelComponent,AcceptComponent],
   imports: [BrowserModule,FormsModule, IonicModule.forRoot({mode:'md', scrollAssist: false}), HttpClientModule,AppRoutingModule,],
   providers: [
     StatusBar,Network, EventService, AuthGuard, WelcomeGuard,Camera,ImagePicker,WebView,HTTP,File,
-
-    SplashScreen,Device,AppVersion,Clipboard,
+    SplashScreen,Device,AppVersion,Clipboard,InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     OneSignal],
   bootstrap: [AppComponent],

@@ -207,13 +207,32 @@ export class ApiService {
   RemovePreferences(Data): any {
     return this.http.post(environment.BaseUrl + 'remove_preference', Data, this.httpOptions);
   }
+  getDriver(Data): any {
+    return this.http.post(environment.BaseUrl + 'driverList', Data, this.httpOptions);
+  }
+  assignDriver(Data): any {
+    return this.http.post(environment.BaseUrl + 'assignTask', Data, this.httpOptions);
+  }
 
+  getStatus(Data): any {
+    return this.http.post(environment.BaseUrl + 'StatusList', Data, this.httpOptions);
+  }
+  changeStatus(Data): any {
+    return this.http.post(environment.BaseUrl + 'ChangeOrderStatus', Data, this.httpOptions);
+  }
+  acceptOrder(Data): any {
+    return this.http.post(environment.BaseUrl + 'AcceptOrdes', Data, this.httpOptions);
+  }
+  declineOrder(Data): any {
+    return this.http.post(environment.BaseUrl + 'DeclineOrders', Data, this.httpOptions);
+  }
 
-
-
-
-
-
+  paypalRefund(Data): any {
+    return this.http.post(environment.BaseUrl + 'PaypalRefund', Data, this.httpOptions);
+  }
+  cityPayRefund(Data): any {
+    return this.http.post(environment.BaseUrl + 'citypayRefund', Data, this.httpOptions);
+  }
 
 
   bookNow(): any {

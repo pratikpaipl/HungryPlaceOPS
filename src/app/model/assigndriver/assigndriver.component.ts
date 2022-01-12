@@ -8,42 +8,57 @@ import { Tools } from 'src/app/shared/tools';
   templateUrl: './assigndriver.component.html',
   styleUrls: ['./assigndriver.component.scss'],
 })
-export class AssignDriverModelComponent implements OnInit {
-  defValue: any;
-  speinst= '';
-  mId: any;
-  Services=[];
-  itemsCuisines=[];
-  rat = 0;
-  rate = 0;
-  @ViewChild('rating') rating : any;
+export class AssignDriverModelComponent  {
+
+  DriverList=[];
+  selDriver='';
 
   constructor(public navParams: NavParams, public router: Router, private apiService: ApiService, public tools: Tools, public modalCtrl: ModalController) {
-    this.mId = this.navParams.get('mId');
   }
 
-  ngOnInit() {
-    // this.cuisineList()
+  ionViewWillEnter() {
+    this.getDriver();
   }
-  onModelChange(rating) {
-    console.log("changed rating: ", rating);
-     this.rat = rating;
+
+  itemAdd(event) {
+    this.selDriver=event.detail.value;
+    console.log("event :: ", event.detail.value);
   }
-  addReview(){
-    var msg ='';
-    if(this.rat == 0 || this.speinst == ''){
-      msg = msg + 'Rating & Review is required.'
-    } 
-    if (msg != '') {
-      this.tools.openAlert(msg);
-    } else {    
-      var selItem = { "rating":this.rat,  "review": this.speinst }    
-       this.modalCtrl.dismiss(selItem);
+  submit(){
+    console.log("submit > :: ", this.selDriver);
+    if(this.selDriver != ''){
+      this.modalCtrl.dismiss(this.selDriver);
+    }else{
+      this.tools.openAlert("Please Select Driver")
     }
 
   }
-
  
+
+  getDriver() {
+    if (this.tools.isNetwork()) {
+      this.tools.openLoader();
+      let postData = new FormData();
+      
+      this.apiService.getDriver(postData).subscribe(data => {
+        this.tools.closeLoader();
+
+        let res: any = data;
+        console.log(' Response >>> ', res);
+        this.DriverList=res.details;
+      }, (error: Response) => {
+        this.tools.closeLoader();
+        console.log(error);
+
+        let err: any = error;
+        this.tools.openAlertToken(err.status, err.error.message);
+      });
+
+    } else {
+      this.tools.closeLoader();
+    }
+
+  }
 
   dismissModal() {
     this.modalCtrl.dismiss('');
@@ -52,6 +67,5 @@ export class AssignDriverModelComponent implements OnInit {
   cancel() {
     this.modalCtrl.dismiss('');
   }
-
 
 }

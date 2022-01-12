@@ -19,10 +19,10 @@
                     </ion-item>
                 </ion-radio-group> -->
 
-                        <ion-radio-group class="tab-radio" [(ngModel)]="defValue" (ionChange)="itemSelProd($event)">
-                            <ion-item style="width: 90vh; --inner-border-width: 0;">
-                                <ion-radio value="fullrefund" slot="start"> </ion-radio>
-                                <ion-label class="cat-title"> Full Refund</ion-label>
+                        <ion-radio-group (ionChange)="itemAdd($event)">
+                            <ion-item *ngFor="let status of StatusList" style="width: 90vh; --inner-border-width: 0;">
+                                <ion-radio value="{{status.status_name}}" slot="start"> </ion-radio>
+                                <ion-label class="cat-title"> {{status.status_name}}</ion-label>
                             </ion-item>
                         </ion-radio-group>
                     </ion-col>
@@ -39,7 +39,7 @@
                 </ion-row>
 
                 <ion-row class="button_box mt-20">
-                    <ion-button class="btn-red" type="submit">Submit</ion-button>
+                    <ion-button class="btn-red" (click)="submit()">Submit</ion-button>
                 </ion-row>
 
             </ion-col>

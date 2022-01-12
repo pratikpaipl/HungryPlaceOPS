@@ -8,42 +8,18 @@ import { Tools } from 'src/app/shared/tools';
   templateUrl: './decline.component.html',
   styleUrls: ['./decline.component.scss'],
 })
-export class DeclineComponent implements OnInit {
-  defValue: any;
-  comment= '';
-  mId: any;
-  Services=[];
-  itemsCuisines=[];
-  rat = 0;
-  rate = 0;
-  @ViewChild('rating') rating : any;
+export class DeclineComponent {
 
-  constructor(public navParams: NavParams, public router: Router, private apiService: ApiService, public tools: Tools, public modalCtrl: ModalController) {
-    this.mId = this.navParams.get('mId');
+  comment='';
+
+  constructor(public navParams: NavParams, 
+    public router: Router, private apiService: ApiService, public tools: Tools, public modalCtrl: ModalController) {
   }
 
-  ngOnInit() {
-    // this.cuisineList()
-  }
-  onModelChange(rating) {
-    console.log("changed rating: ", rating);
-     this.rat = rating;
-  }
-  // addReview(){
-  //   var msg ='';
-  //   if(this.rat == 0 || this.speinst == ''){
-  //     msg = msg + 'Rating & Review is required.'
-  //   } 
-  //   if (msg != '') {
-  //     this.tools.openAlert(msg);
-  //   } else {    
-  //     var selItem = { "rating":this.rat,  "review": this.speinst }    
-  //      this.modalCtrl.dismiss(selItem);
-  //   }
+  submit(){
+    this.modalCtrl.dismiss(this.comment);
+}
 
-  // }
-
- 
 
   dismissModal() {
     this.modalCtrl.dismiss('');

@@ -12,7 +12,7 @@
                         </div>
                     </ion-col>
                     <ion-col size="1">
-                        <ion-buttons no-padding (click)="printer()">
+                        <ion-buttons no-padding>
                             <i class="fas fa-print"></i>
                         </ion-buttons>
                     </ion-col>
@@ -48,7 +48,7 @@
             <ion-col class="content_col" size="12">
                 <ion-row>
                     <ion-col class="left_col" size="10">
-                        <ion-label [ngClass]="{'greencolor' : Connected,'radcolor' : !Connected}">{{ConnectValue}}</ion-label>
+                        <ion-label [ngClass]="{'greencolor' : printer.Connected,'radcolor' : !printer.Connected}">{{printer.ConnectValue}}</ion-label>
                     </ion-col>
                     <ion-col class="right_col deletes" size="2" (click)="deletePrinter(printer.printer_id)" *ngIf="printer.printername !== 'Primary Printer' && printer.printername !=='Kitchen Printer'">
                         <i class="fas fa-trash-alt"></i>

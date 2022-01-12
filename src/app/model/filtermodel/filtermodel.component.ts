@@ -8,7 +8,7 @@ import { Tools } from 'src/app/shared/tools';
   templateUrl: './filtermodel.component.html',
   styleUrls: ['./filtermodel.component.scss'],
 })
-export class FilterModelComponent implements OnInit {
+export class FilterModelComponent  {
   //For Status List
   statusList = [];
   //For Order-Type List
@@ -42,7 +42,7 @@ export class FilterModelComponent implements OnInit {
    // this.ToDate = this.SelToDate.split('T')[0];
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getTodayOrderData();
   }
 
