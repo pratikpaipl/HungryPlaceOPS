@@ -27,7 +27,7 @@
         <ion-row class="box-des p-0">
             <ion-col class="content_col" size="12" style="background: #f6f6f6;padding: 13px 10px;">
                 <ion-row>
-                    <ion-col class="left_col">
+                    <ion-col size="12">
                         <ion-label class="d-block f-11">Customer Details</ion-label>
                     </ion-col>
                 </ion-row>
@@ -122,9 +122,7 @@
                         <ion-label class="d-block f-11">{{item.total_price}}</ion-label>
                     </ion-col>
                     <ion-col size="2">
-                        <ion-item style="width: 90vh;">
-                            <!-- <ion-checkbox slot="end" [(ngModel)]="ResCopy" (click)="UpdatePrinter(ResCopy,'restaurant_copy')"></ion-checkbox> -->
-
+                        <ion-item class="chkbox">
                             <ion-checkbox slot="start" [(ngModel)]="item.isChecked" (ionChange)="changeItem(item)"></ion-checkbox>
                         </ion-item>
                     </ion-col>
@@ -133,10 +131,10 @@
 
             <ion-col class="content_col" size="12">
                 <ion-row>
-                    <ion-col class="left_col">
+                    <ion-col size="6">
                         <ion-label class="d-block title f-15">Sub Total</ion-label>
                     </ion-col>
-                    <ion-col class="right_col">
+                    <ion-col size="6" style="text-align: right;">
                         <ion-label class="d-block title f-15">{{totalCount.subtotal}}</ion-label>
                     </ion-col>
                 </ion-row>
@@ -144,10 +142,10 @@
 
             <ion-col class="content_col" size="12">
                 <ion-row>
-                    <ion-col class="left_col">
+                    <ion-col size="6">
                         <ion-label class="d-block title f-15">Delivery Fee</ion-label>
                     </ion-col>
-                    <ion-col class="right_col">
+                    <ion-col size="6" style="text-align: right;">
                         <ion-label class="d-block title f-15">{{totalCount.delivery_charges}}</ion-label>
                     </ion-col>
                 </ion-row>
@@ -155,10 +153,10 @@
 
             <ion-col class="content_col" size="12">
                 <ion-row>
-                    <ion-col class="left_col">
+                    <ion-col size="6">
                         <ion-label class="d-block title f-15">Refundable Amount</ion-label>
                     </ion-col>
-                    <ion-col class="right_col">
+                    <ion-col size="6" style="text-align: right;">
                         <ion-label class="d-block title f-15">{{DetailData.TotalRefundableAmount | currency :'GBP':'symbol':'1.2-2'}}</ion-label>
                     </ion-col>
                 </ion-row>
@@ -166,10 +164,10 @@
 
             <ion-col class="content_col" size="12">
                 <ion-row>
-                    <ion-col class="left_col">
+                    <ion-col size="6">
                         <ion-label class="d-block title f-15">Refund Amount</ion-label>
                     </ion-col>
-                    <ion-col class="right_col">
+                    <ion-col size="6" style="text-align: right;">
                         <!-- <ion-input type="text" class="form-control">{{refundAmount| currency :'GBP':'symbol':'1.2-2'}}</ion-input> -->
                         <ion-input type="text" class="form-control" [(ngModel)]="refundAmount"></ion-input>
                     </ion-col>
