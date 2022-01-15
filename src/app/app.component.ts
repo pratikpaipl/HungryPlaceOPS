@@ -1,3 +1,4 @@
+import { EveryMinuteCallService } from './services/everyminutecall.service';
 import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { IonRouterOutlet, ModalController, Platform, ToastController } from '@ionic/angular';
@@ -22,6 +23,7 @@ export class AppComponent {
      private oneSignal: OneSignal,
     private toast: ToastController,
     public modalCtrl: ModalController,
+    private everyminutecall: EveryMinuteCallService,
 ) {
 
     this.initializeApp();
@@ -60,6 +62,7 @@ export class AppComponent {
       this.statusBar.show();
       this.splashScreen.hide();
       this.callOneSignal();
+      this.everyminutecall.callApi();
     });
   }
  

@@ -39,7 +39,6 @@
         "@ionic-native/status-bar": "^5.36.0",
         "@ionic/angular": "^5.5.2",
         "cordova-android": "9.1.0",
-        "cordova-ios": "6.2.0",
         "crypto-js": "^4.1.1",
         "esc-pos-encoder-ionic": "^1.1.3",
         "events": "^3.3.0",
@@ -118,7 +117,6 @@
             "cz.blocshop.socketsforcordova": {}
         },
         "platforms": [
-            "ios",
             "android"
         ]
     }

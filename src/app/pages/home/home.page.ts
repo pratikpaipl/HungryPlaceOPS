@@ -85,7 +85,7 @@ export class HomePage {
   HomeTableBooking(){
     console.log("Open Browser");
     let target = "_blank";
-    const browser = this.iab.create("https://hungrydev.cuisine.je/ops/index.html",target,this.options);
+    const browser = this.iab.create("https://hungrydev.cuisine.je/mobileops/order-list.php?login_token="+window.localStorage['login_token'],target,this.options);
     browser.on("loadstop").subscribe((event) => {
       console.log("orderData.url_details ", event.url);
       console.log("loadstop ==> ", event.url);
@@ -122,7 +122,7 @@ export class HomePage {
     this.menu.close();
     console.log("Open Browser");
     let target = "_blank";
-    const browser = this.iab.create("https://hungrydev.cuisine.je/ops/index.html",target,this.options);
+    const browser = this.iab.create("https://hungrydev.cuisine.je/mobileops/order-list.php?login_token="+window.localStorage['login_token'],target,this.options);
     browser.on("loadstop").subscribe((event) => {
       console.log("orderData.url_details ", event.url);
       console.log("loadstop ==> ", event.url);
