@@ -3,3 +3,4 @@ node_modules/*
 
 plugins/android.json
 plugins
+node_modules/.bin/
