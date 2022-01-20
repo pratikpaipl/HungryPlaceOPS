@@ -278,7 +278,6 @@ export class HomePage {
         if(res.details.BellRang !=0){
           console.log(' callSound >>> ', "Ringing");
           callSound();
-
         }
 
         this.DTQty=res.details.merchantEstimationdetails.merchant_delivery_estimation
@@ -302,7 +301,7 @@ export class HomePage {
         console.log(error);
 
         let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
+        this.tools.openAlertToken(err.status, err.error.msg);
       });
 
     } else {
@@ -323,7 +322,7 @@ export class HomePage {
         console.log(error);
 
         let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
+        this.tools.openAlertToken(err.status, err.error.msg);
       });
 
     } else {
@@ -346,7 +345,7 @@ export class HomePage {
         console.log(error);
 
         let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
+        this.tools.openAlertToken(err.status, err.error.msg);
       });
 
     } else {

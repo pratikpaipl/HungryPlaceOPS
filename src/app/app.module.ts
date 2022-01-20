@@ -1,3 +1,4 @@
+import { Tools } from 'src/app/shared/tools';
 import { DeclineComponent } from './model/decline/decline.component';
 import { AcceptComponent } from './model/accept/accept.component';
 import { AddOnModelComponent } from './model/add-on-model/add-on-model.component';
@@ -34,6 +35,7 @@ import { AssignDriverModelComponent } from './model/assigndriver/assigndriver.co
 import { ChangeStatusModelComponent } from './model/changestatus/changestatus.component';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ChangeDriverModelComponent } from './model/changedriver/changedriver.component';
+import { EveryMinuteCallService } from './services/everyminutecall.service';
 
 @NgModule({
   declarations: [AppComponent,AddPrefrencesComponent,FilterModelComponent,DeclineComponent,
@@ -45,7 +47,7 @@ import { ChangeDriverModelComponent } from './model/changedriver/changedriver.co
   imports: [BrowserModule,FormsModule, IonicModule.forRoot({mode:'md', scrollAssist: false}), HttpClientModule,AppRoutingModule,],
   providers: [
     StatusBar,Network, EventService, AuthGuard, WelcomeGuard,Camera,ImagePicker,WebView,HTTP,File,
-    SplashScreen,Device,AppVersion,Clipboard,InAppBrowser,
+    SplashScreen,Device,AppVersion,Clipboard,InAppBrowser,Tools,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     OneSignal],
   bootstrap: [AppComponent],

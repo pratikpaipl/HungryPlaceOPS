@@ -73,8 +73,8 @@ export class LoginPage {
           console.log('Api Error ', err);
 
           this.tools.closeLoader();
-          this.tools.openAlertToken(err.status, err.error.message);
-          console.log('Api Error >>>> ', err.error.message);
+          this.tools.openAlertToken(err.status, err.error.msg);
+          console.log('Api Error >>>> ', err.error.msg);
 
         });
       } else {

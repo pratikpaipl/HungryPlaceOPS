@@ -18,6 +18,10 @@ export class ProfilePage {
   loginForm: FormGroup;
   user: any;
 
+  passwordToggleicon="eye";
+  cnfPasswordToggleicon="eye";
+  showPassword = false;
+  showCnfPassword = false;
 
   constructor(public pickerCtrl: PickerController, public tools: Tools, public formBuilder: FormBuilder, private eventService: EventService,
     private activatedRoute: ActivatedRoute, private router: Router, public apiService: ApiService) {
@@ -79,4 +83,21 @@ export class ProfilePage {
  
   isReadonly() {return true;}
 
+  togglePassword():void {
+    this.showPassword = !this.showPassword;
+    if(this.passwordToggleicon =='eye'){
+      this.passwordToggleicon='eye-off';
+    }else{
+      this.passwordToggleicon='eye';
+    }
+  }
+
+  CNFtogglePassword():void {
+    this.showCnfPassword = !this.showCnfPassword;
+    if(this.cnfPasswordToggleicon =='eye'){
+      this.cnfPasswordToggleicon='eye-off';
+    }else{
+      this.cnfPasswordToggleicon='eye';
+    }
+  }
 }

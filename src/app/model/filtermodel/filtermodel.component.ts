@@ -95,7 +95,7 @@ export class FilterModelComponent  {
 
 
   submit(){
-    this.SubmitData = [{ SelStatus: this.Status},{ SelOrderType: this.OrderType},{ SelFromDate: this.SelFromDate},{ SelToDate: this.SelToDate},{ SelSortBy: this.SortBY}]
+    this.SubmitData = [{ SelStatus: this.Status==null?'':this.Status},{ SelOrderType: this.OrderType==null?'':this.OrderType},{ SelFromDate: this.SelFromDate},{ SelToDate: this.SelToDate},{ SelSortBy: this.SortBY==null?'':this.SortBY}]
     this.modalCtrl.dismiss((this.SubmitData));
     console.log("data >>",this.Status+" >>> "+ this.OrderType +" >>> "+this.SelFromDate+" >> "+ this.SelToDate+" >> "+this.SortBY)
   }
@@ -122,7 +122,7 @@ export class FilterModelComponent  {
         console.log(error);
 
         let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
+        this.tools.openAlertToken(err.status, err.error.msg);
       });
 
     } else {

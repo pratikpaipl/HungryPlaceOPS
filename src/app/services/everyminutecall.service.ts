@@ -1,3 +1,4 @@
+import { Tools } from 'src/app/shared/tools';
 import { ApiService } from './api.service-new';
 import { Injectable } from '@angular/core';
 
@@ -8,7 +9,7 @@ declare const callSound: any;
 })
 export class EveryMinuteCallService {
 
-  constructor(private apiService: ApiService) { 
+  constructor(private apiService: ApiService,private tools:Tools) { 
 
   }
 
@@ -39,7 +40,7 @@ export class EveryMinuteCallService {
         console.log(error);
 
         let err: any = error;
-        //this.tools.openAlertToken(err.status, err.error.message);
+        this.tools.openAlertToken(err.status, err.error.msg);
       });
 
     // } else {

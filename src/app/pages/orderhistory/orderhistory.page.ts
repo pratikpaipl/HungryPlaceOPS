@@ -80,17 +80,17 @@ export class OrderHistoryPage {
           this.ALLOrderList = res.details;
           console.log('All Order Response >>> ', this.OrderList.length);
 
-        }else{
+        }
+        if (res.code == 2) {
           this.tools.openAlert(res.msg);
         }
-     
-     
+        
       }, (error: Response) => {
         this.tools.closeLoader();
         console.log(error);
 
         let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
+        this.tools.openAlertToken(err.status, err.error.msg);
       });
 
     } else {

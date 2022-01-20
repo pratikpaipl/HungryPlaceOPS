@@ -28,13 +28,27 @@
                         <ion-input type="text" [readonly]="isReadonly" class="form-control" formControlName='username'>
                         </ion-input>
                     </div>
-
                     <div class="form-group">
-                        <ion-input type="text" placeholder="Password" class="form-control" formControlName="password"></ion-input>
+                        <ion-item class="form-control" style="height: 55px;">
+                            <ion-label style="margin-top: -5px;" position="floating">Password</ion-label>
+                            <ion-input [type]="showPassword ? 'text' :'password'" formControlName="password"></ion-input>
+                            <ion-icon slot="end" [name]="passwordToggleicon" (click)="togglePassword()"></ion-icon>
+                        </ion-item>
+                    </div>
+                    <div class="form-group">
+                        <ion-item class="form-control" style="height: 55px;">
+                            <ion-label style="margin-top: -5px;" position="floating">Confirm Password</ion-label>
+                            <ion-input [type]="showCnfPassword ? 'text' :'password'" formControlName="cnfpassword"></ion-input>
+                            <ion-icon slot="end" [name]="cnfPasswordToggleicon" (click)="CNFtogglePassword()"></ion-icon>
+                        </ion-item>
+                    </div>
+                    <!-- <div class="form-group">
+                        <ion-input [type]="showPassword ? 'text' :'password'" placeholder="Password" class="form-control" formControlName="password"></ion-input>
+                        <ion-icon style="margin-top: 25px;" slot="end" [name]="passwordToggleicon" (click)="togglePassword()"></ion-icon>
                     </div>
                     <div class="form-group">
                         <ion-input type="text" placeholder="Confirm Password" class="form-control" formControlName="cnfpassword"></ion-input>
-                    </div>
+                    </div> -->
 
                     <div class="buttion_box">
                         <ion-button class="btn-red" type="submit">Save</ion-button>

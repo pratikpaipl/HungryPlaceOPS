@@ -195,7 +195,6 @@ export class Tools {
                         if (status == 401) {
                     
                             localStorage.clear();
-                            localStorage.removeItem('kushal_cart_data');
                             localStorage.removeItem('user_id');
                             localStorage.removeItem('login_token');
                             localStorage.removeItem('ops_user_data');

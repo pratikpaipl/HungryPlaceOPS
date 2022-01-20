@@ -83,7 +83,7 @@ export class AllClientPage {
         console.log(error);
 
         let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
+        this.tools.openAlertToken(err.status, err.error.msg);
       });
 
     } else {
@@ -136,7 +136,7 @@ export class AllClientPage {
         console.log(error);
 
         let err: any = error;
-        this.tools.openAlertToken(err.status, err.error.message);
+        this.tools.openAlertToken(err.status, err.error.msg);
       });
 
     } else {
